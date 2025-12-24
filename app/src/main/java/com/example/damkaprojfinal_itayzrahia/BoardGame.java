@@ -15,7 +15,7 @@ public class BoardGame extends View {
     private boolean firstTime = true;
     private final int NUM_OF_SQUARES = 8;
     private float tileSize;
-    private float boardOffsetY;
+    private float BOARD_STARTS_FROM;
     private boolean isWhiteTurn = true;
 
     public BoardGame(Context context) {
@@ -46,10 +46,10 @@ public class BoardGame extends View {
 
         tileSize = width / NUM_OF_SQUARES;
         float boardHeight = tileSize * NUM_OF_SQUARES;
-        boardOffsetY = (height - boardHeight) / 2;
+        BOARD_STARTS_FROM = (height - boardHeight) / 2;
 
         float x = 0;
-        float y = boardOffsetY;
+        float y = BOARD_STARTS_FROM;
         int color;
 
         for (int row = 0; row < NUM_OF_SQUARES; row++) {
@@ -75,7 +75,7 @@ public class BoardGame extends View {
             for (int col = 0; col < NUM_OF_SQUARES; col++) {
                 if ((row + col) % 2 != 0) {
                     float cx = col * tileSize + tileSize / 2;
-                    float cy = boardOffsetY + row * tileSize + tileSize / 2;
+                    float cy = BOARD_STARTS_FROM + row * tileSize + tileSize / 2;
 
                     if (row < 3) {
                         // Team Red
@@ -144,7 +144,7 @@ public class BoardGame extends View {
 
     private void handleCoinRelease(float x, float y) {
         int newCol = (int) (x / tileSize);
-        int newRow = (int) ((y - boardOffsetY) / tileSize);
+        int newRow = (int) ((y - BOARD_STARTS_FROM) / tileSize);
 
         if (newRow < 0 || newRow >= NUM_OF_SQUARES || newCol < 0 || newCol >= NUM_OF_SQUARES) {
             resetCoinPosition();
@@ -198,7 +198,7 @@ public class BoardGame extends View {
         activeCoin.row = r;
         activeCoin.col = c;
         activeCoin.x = c * tileSize + tileSize / 2;
-        activeCoin.y = boardOffsetY + r * tileSize + tileSize / 2;
+        activeCoin.y = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
         activeCoin.lastX = activeCoin.x;
         activeCoin.lastY = activeCoin.y;
     }
