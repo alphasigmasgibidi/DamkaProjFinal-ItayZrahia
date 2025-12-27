@@ -9,8 +9,6 @@ public class Coin extends Shape {
     public float lastX, lastY;
     public int team; // 1 = White, -1 = Red
     public int row, col; // Logical position on grid
-
-    // Constants for teams
     public static final int TEAM_RED = -1;
     public static final int TEAM_WHITE = 1;
 
