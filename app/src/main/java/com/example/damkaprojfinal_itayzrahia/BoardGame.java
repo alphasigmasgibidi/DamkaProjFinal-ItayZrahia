@@ -37,6 +37,7 @@ public class BoardGame extends View
             initCoins();
             firstTime = false;
         }
+
         drawBoard(canvas);
         drawCoins(canvas);
     }
@@ -45,25 +46,40 @@ public class BoardGame extends View
     {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
+
         tileSize = width / NUM_OF_SQUARES;
         float boardHeight = tileSize * NUM_OF_SQUARES;
         BOARD_STARTS_FROM = (height - boardHeight) / 2;
+
+        float x = 0;
+        float y = BOARD_STARTS_FROM;
+        int color;
 
         for (int row = 0; row < NUM_OF_SQUARES; row++)
         {
             for (int col = 0; col < NUM_OF_SQUARES; col++)
             {
-                int color = ((row + col) % 2 == 0) ? Color.WHITE : Color.BLACK;
-                float x = col * tileSize;
-                float y = BOARD_STARTS_FROM + row * tileSize;
+                if ((row + col) % 2 == 0)
+                {
+                    color = Color.WHITE;
+                }
+                else
+                {
+                    color = Color.BLACK;
+                }
+
                 squares[row][col] = new Square(x, y, tileSize, tileSize, color);
+                x += tileSize;
             }
+            y += tileSize;
+            x = 0;
         }
     }
 
     private void initCoins()
     {
         float r = tileSize / 4;
+
         for (int row = 0; row < NUM_OF_SQUARES; row++)
         {
             for (int col = 0; col < NUM_OF_SQUARES; col++)
@@ -72,6 +88,7 @@ public class BoardGame extends View
                 {
                     float cx = col * tileSize + tileSize / 2;
                     float cy = BOARD_STARTS_FROM + row * tileSize + tileSize / 2;
+
                     if (row < 3)
                     {
                         coins.add(new Coin(cx, cy, r, Color.RED, Coin.TEAM_RED, row, col));
@@ -105,7 +122,9 @@ public class BoardGame extends View
                 c.draw(canvas);
             }
         }
-        catch (Exception e) {}
+        catch (Exception e)
+        {
+        }
     }
 
     @Override
@@ -121,7 +140,7 @@ public class BoardGame extends View
                 {
                     if (c.didUserTouchMe(x, y))
                     {
-                        if ((isWhiteTurn && c.team == Coin.TEAM_WHITE) || (!isWhiteTurn && c.team == Coin.TEAM_RED))
+                        if (isWhiteTurn && c.team == Coin.TEAM_WHITE || !isWhiteTurn && c.team == Coin.TEAM_RED)
                         {
                             activeCoin = c;
                         }
@@ -161,7 +180,14 @@ public class BoardGame extends View
             resetCoinPosition();
             return;
         }
-        if ((newRow + newCol) % 2 == 0 || getSquareContent(newRow, newCol) != null)
+
+        if ((newRow + newCol) % 2 == 0)
+        {
+            resetCoinPosition();
+            return;
+        }
+
+        if (getSquareContent(newRow, newCol) != null)
         {
             resetCoinPosition();
             return;
@@ -169,7 +195,10 @@ public class BoardGame extends View
 
         int dRow = newRow - activeCoin.row;
         int dCol = newCol - activeCoin.col;
-        boolean directionCorrect = (activeCoin.team == Coin.TEAM_WHITE && dRow < 0) || (activeCoin.team == Coin.TEAM_RED && dRow > 0);
+
+        boolean directionCorrect = false;
+        if (activeCoin.team == Coin.TEAM_WHITE && dRow < 0) directionCorrect = true;
+        if (activeCoin.team == Coin.TEAM_RED && dRow > 0) directionCorrect = true;
 
         if (!directionCorrect)
         {
@@ -187,6 +216,7 @@ public class BoardGame extends View
             int midRow = activeCoin.row + dRow / 2;
             int midCol = activeCoin.col + dCol / 2;
             Coin eaten = getSquareContent(midRow, midCol);
+
             if (eaten != null && eaten.team != activeCoin.team)
             {
                 moveCoin(newRow, newCol);
@@ -241,20 +271,39 @@ public class BoardGame extends View
     {
         eatenCoin.row = -1;
         eatenCoin.col = -1;
+
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
                 final float speed = 25;
-                float targetY = isWhiteTurn ? getHeight() + 100 : -100;
-                float moveStep = isWhiteTurn ? speed : -speed;
+                float targetY;
+                float currentSpeed;
+
+                if (isWhiteTurn)
+                {
+                    targetY = getHeight() + 100;
+                    currentSpeed = -speed;
+                }
+                else
+                {
+                    targetY = -100;
+                    currentSpeed = speed;
+                }
 
                 while ((isWhiteTurn && eatenCoin.y < targetY) || (!isWhiteTurn && eatenCoin.y > targetY))
                 {
-                    eatenCoin.y += moveStep;
+                    eatenCoin.y += currentSpeed;
                     postInvalidate();
-                    try { Thread.sleep(20); } catch (InterruptedException e) {}
+                    try
+                    {
+                        Thread.sleep(20);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
                 coins.remove(eatenCoin);
             }
