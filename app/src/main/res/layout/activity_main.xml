@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A1A1A">
+    android:background="#2B2B2B">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,63 +19,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DAMKA"
-            android:textColor="#FF0000"
-            android:textSize="50sp"
+            android:textColor="#D32F2F"
+            android:textSize="55sp"
             android:textStyle="bold"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="50dp"/>
 
         <Button
             android:id="@+id/btnPlayWhite"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="260dp"
+            android:layout_height="55dp"
             android:text="שחק לבן"
-            android:backgroundTint="#C0C0C0"
-            android:textColor="#000000"
-            android:layout_marginBottom="10dp"/>
+            android:backgroundTint="#E0E0E0"
+            android:textColor="#2B2B2B"
+            android:layout_marginBottom="12dp"/>
 
         <Button
             android:id="@+id/btnPlayRed"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="260dp"
+            android:layout_height="55dp"
             android:text="שחק אדום"
-            android:backgroundTint="#FF0000"
+            android:backgroundTint="#B71C1C"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="12dp"/>
 
         <Button
             android:id="@+id/btnPlayAI"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="260dp"
+            android:layout_height="55dp"
             android:text="בינה מלאכותית"
-            android:backgroundTint="#444444"
+            android:backgroundTint="#455A64"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="40dp"/>
 
         <Button
             android:id="@+id/btnRegister"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             android:text="הרשמה"
-            android:backgroundTint="#C0C0C0"
-            android:textColor="#000000"
+            android:backgroundTint="#E0E0E0"
+            android:textColor="#2B2B2B"
             android:layout_marginBottom="10dp"/>
 
         <Button
             android:id="@+id/btnInstructions"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             android:text="הוראות"
-            android:backgroundTint="#C0C0C0"
-            android:textColor="#000000"
+            android:backgroundTint="#E0E0E0"
+            android:textColor="#2B2B2B"
             android:layout_marginBottom="10dp"/>
 
         <Button
             android:id="@+id/btnSettings"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             android:text="הגדרות"
-            android:backgroundTint="#C0C0C0"
-            android:textColor="#000000"/>
+            android:backgroundTint="#E0E0E0"
+            android:textColor="#2B2B2B"/>
 
     </LinearLayout>
 
