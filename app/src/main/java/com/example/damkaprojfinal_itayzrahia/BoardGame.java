@@ -19,13 +19,17 @@ public class BoardGame extends View
     private boolean isWhiteTurn = true;
     private String mode;
 
+    private GameModule gameModule;
+
     public BoardGame(Context context, String mode)
     {
         super(context);
         this.mode = mode;
-        this.squares = new Square[NUM_OF_SQUARES][NUM_OF_SQUARES];
-        this.coins = new ArrayList<>();
+        squares = new Square[NUM_OF_SQUARES][NUM_OF_SQUARES];
+        coins = new ArrayList<>();
+        gameModule = new GameModule();
     }
+
 
     @Override
     protected void onDraw(Canvas canvas)
@@ -44,6 +48,7 @@ public class BoardGame extends View
         drawCoins(canvas);
     }
 
+
     private void initBoard(Canvas canvas)
     {
         int width = canvas.getWidth();
@@ -60,6 +65,7 @@ public class BoardGame extends View
             for (int col = 0; col < NUM_OF_SQUARES; col++)
             {
                 int color;
+
                 if ((row + col) % 2 == 0)
                 {
                     color = Color.parseColor("#C0C0C0");
@@ -68,13 +74,15 @@ public class BoardGame extends View
                 {
                     color = Color.parseColor("#800000");
                 }
+
                 squares[row][col] = new Square(x, y, tileSize, tileSize, color);
-                x = x + tileSize;
+                x += tileSize;
             }
-            y = y + tileSize;
+            y += tileSize;
             x = 0;
         }
     }
+
 
     private void initCoins()
     {
@@ -101,6 +109,7 @@ public class BoardGame extends View
         }
     }
 
+
     private void drawBoard(Canvas canvas)
     {
         for (int i = 0; i < NUM_OF_SQUARES; i++)
@@ -112,6 +121,7 @@ public class BoardGame extends View
         }
     }
 
+
     private void drawCoins(Canvas canvas)
     {
         for (Coin c : coins)
@@ -119,6 +129,7 @@ public class BoardGame extends View
             c.draw(canvas);
         }
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
@@ -133,19 +144,9 @@ public class BoardGame extends View
                 {
                     if (c.didUserTouchMe(x, y))
                     {
-                        if (isWhiteTurn == true)
+                        if ((isWhiteTurn && c.team == Coin.TEAM_WHITE) || (!isWhiteTurn && c.team == Coin.TEAM_RED))
                         {
-                            if (c.team == Coin.TEAM_WHITE)
-                            {
-                                activeCoin = c;
-                            }
-                        }
-                        else
-                        {
-                            if (c.team == Coin.TEAM_RED)
-                            {
-                                activeCoin = c;
-                            }
+                            activeCoin = c;
                         }
                         break;
                     }
@@ -173,6 +174,7 @@ public class BoardGame extends View
         return true;
     }
 
+
     private void handleCoinRelease(float x, float y)
     {
         int newCol = (int) (x / tileSize);
@@ -186,25 +188,9 @@ public class BoardGame extends View
 
         int dRow = newRow - activeCoin.row;
         int dCol = newCol - activeCoin.col;
+        boolean directionCorrect = (activeCoin.team == Coin.TEAM_WHITE && dRow < 0) || (activeCoin.team == Coin.TEAM_RED && dRow > 0);
 
-        boolean directionCorrect = false;
-
-        if (activeCoin.team == Coin.TEAM_WHITE)
-        {
-            if (dRow < 0)
-            {
-                directionCorrect = true;
-            }
-        }
-        else if (activeCoin.team == Coin.TEAM_RED)
-        {
-            if (dRow > 0)
-            {
-                directionCorrect = true;
-            }
-        }
-
-        if (directionCorrect == false)
+        if (!directionCorrect)
         {
             resetCoinPosition();
             return;
@@ -217,22 +203,15 @@ public class BoardGame extends View
         }
         else if (Math.abs(dRow) == 2 && Math.abs(dCol) == 2)
         {
-            int midRow = activeCoin.row + (dRow / 2);
-            int midCol = activeCoin.col + (dCol / 2);
+            int midRow = activeCoin.row + dRow / 2;
+            int midCol = activeCoin.col + dCol / 2;
             Coin eaten = getSquareContent(midRow, midCol);
 
-            if (eaten != null)
+            if (eaten != null && eaten.team != activeCoin.team)
             {
-                if (eaten.team != activeCoin.team)
-                {
-                    moveCoin(newRow, newCol);
-                    animateAndRemoveCoin(eaten);
-                    switchTurn();
-                }
-                else
-                {
-                    resetCoinPosition();
-                }
+                moveCoin(newRow, newCol);
+                animateAndRemoveCoin(eaten);
+                switchTurn();
             }
             else
             {
@@ -245,15 +224,17 @@ public class BoardGame extends View
         }
     }
 
+
     private void moveCoin(int r, int c)
     {
         activeCoin.row = r;
         activeCoin.col = c;
-        activeCoin.x = c * tileSize + (tileSize / 2);
-        activeCoin.y = BOARD_STARTS_FROM + (r * tileSize) + (tileSize / 2);
+        activeCoin.x = c * tileSize + tileSize / 2;
+        activeCoin.y = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
         activeCoin.lastX = activeCoin.x;
         activeCoin.lastY = activeCoin.y;
     }
+
 
     private void resetCoinPosition()
     {
@@ -261,32 +242,25 @@ public class BoardGame extends View
         activeCoin.y = activeCoin.lastY;
     }
 
+
     private Coin getSquareContent(int r, int c)
     {
         for (Coin coin : coins)
         {
-            if (coin != activeCoin)
+            if (coin != activeCoin && coin.row == r && coin.col == c)
             {
-                if (coin.row == r && coin.col == c)
-                {
-                    return coin;
-                }
+                return coin;
             }
         }
         return null;
     }
 
+
     private void switchTurn()
     {
-        if (isWhiteTurn == true)
-        {
-            isWhiteTurn = false;
-        }
-        else
-        {
-            isWhiteTurn = true;
-        }
+        isWhiteTurn = !isWhiteTurn;
     }
+
 
     private void animateAndRemoveCoin(final Coin eatenCoin)
     {
@@ -302,47 +276,24 @@ public class BoardGame extends View
                 float targetY;
                 float currentSpeed;
 
-                if (isWhiteTurn == true)
+                if (isWhiteTurn)
                 {
                     targetY = getHeight() + 100;
-                    currentSpeed = speed;
+                    currentSpeed = -speed;
                 }
                 else
                 {
                     targetY = -100;
-                    currentSpeed = -speed;
+                    currentSpeed = speed;
                 }
 
-                boolean condition = true;
-                while (condition)
+                while ((isWhiteTurn && eatenCoin.y < targetY) || (!isWhiteTurn && eatenCoin.y > targetY))
                 {
-                    eatenCoin.y = eatenCoin.y + currentSpeed;
+                    eatenCoin.y += currentSpeed;
                     postInvalidate();
-
-                    if (currentSpeed > 0)
-                    {
-                        if (eatenCoin.y >= targetY)
-                        {
-                            condition = false;
-                        }
-                    }
-                    else
-                    {
-                        if (eatenCoin.y <= targetY)
-                        {
-                            condition = false;
-                        }
-                    }
-
-                    try
-                    {
-                        Thread.sleep(20);
-                    }
-                    catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
+                    try { Thread.sleep(20); } catch (InterruptedException e) {}
                 }
+
                 coins.remove(eatenCoin);
             }
         }).start();
