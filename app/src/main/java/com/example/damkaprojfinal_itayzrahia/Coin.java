@@ -12,7 +12,6 @@ public class Coin extends Shape
     public int row, col; // Logical position on grid
     public static final int TEAM_RED = -1;
     public static final int TEAM_WHITE = 1;
-
     public Coin(float x, float y, float r, int color, int team, int row, int col)
     {
         super(x, y, color);

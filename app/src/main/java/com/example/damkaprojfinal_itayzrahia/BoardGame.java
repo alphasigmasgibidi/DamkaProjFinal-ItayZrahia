@@ -14,9 +14,9 @@ public class BoardGame extends View
     private Coin activeCoin;
     private boolean firstTime = true;
     private final int NUM_OF_SQUARES = 8;
-    private float tileSize;
-    private float BOARD_STARTS_FROM;
-    private boolean isWhiteTurn = true;
+    public static float tileSize;
+    public static float BOARD_STARTS_FROM;
+    public static boolean isWhiteTurn = true;
     private String mode;
 
     private GameModule gameModule;
