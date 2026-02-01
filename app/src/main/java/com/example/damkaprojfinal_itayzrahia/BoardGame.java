@@ -298,4 +298,7 @@ public class BoardGame extends View
             }
         }).start();
     }
+
+    public void setPositionFromFb(Position position) {
+    }
 }

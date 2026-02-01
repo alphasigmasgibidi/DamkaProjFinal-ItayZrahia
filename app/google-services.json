@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "628163302054",
-    "project_id": "damkaprojfinal-itayzrahia",
-    "storage_bucket": "damkaprojfinal-itayzrahia.firebasestorage.app"
+    "project_number": "124755673029",
+    "project_id": "damkaprojfinal-itayzrahiareal",
+    "storage_bucket": "damkaprojfinal-itayzrahiareal.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:628163302054:android:4701898d6d85e91d5f5a67",
+        "mobilesdk_app_id": "1:124755673029:android:592fc6705f27dafb4255ac",
         "android_client_info": {
           "package_name": "com.example.damkaprojfinal_itayzrahia"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBjoUws6QAp_F32sVXfiPDCRBRu8N-BFJU"
+          "current_key": "AIzaSyAMHM8Jkqsb2E9BdZPJfTCZh4QN2UUGGLo"
         }
       ],
       "services": {
