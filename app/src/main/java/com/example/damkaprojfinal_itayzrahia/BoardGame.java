@@ -19,15 +19,20 @@ public class BoardGame extends View
     public static boolean isWhiteTurn = true;
     private String mode;
 
-    private GameModule gameModule;
+    //private Position position;
 
-    public BoardGame(Context context, String mode)
+    private GameModule gameModule;
+    private FbModule fbModule;
+
+    public BoardGame(Context context, String mode, FbModule fbModule)
     {
         super(context);
         this.mode = mode;
+        this.fbModule = fbModule;
         squares = new Square[NUM_OF_SQUARES][NUM_OF_SQUARES];
         coins = new ArrayList<>();
         gameModule = new GameModule();
+        //position = new Position();
     }
 
 
@@ -198,8 +203,9 @@ public class BoardGame extends View
 
         if (Math.abs(dRow) == 1 && Math.abs(dCol) == 1)
         {
-            moveCoin(newRow, newCol);
-            switchTurn();
+            Position position = new Position(activeCoin.row,activeCoin.col,newRow,newCol);
+            fbModule.setPositionInFirebase(position);
+
         }
         else if (Math.abs(dRow) == 2 && Math.abs(dCol) == 2)
         {
@@ -209,6 +215,7 @@ public class BoardGame extends View
 
             if (eaten != null && eaten.team != activeCoin.team)
             {
+
                 moveCoin(newRow, newCol);
                 animateAndRemoveCoin(eaten);
                 switchTurn();
@@ -225,7 +232,7 @@ public class BoardGame extends View
     }
 
 
-    private void moveCoin(int r, int c)
+    private void moveCoin(int lastRow, int lastCol, int newRow, int newCol)
     {
         activeCoin.row = r;
         activeCoin.col = c;
@@ -300,5 +307,7 @@ public class BoardGame extends View
     }
 
     public void setPositionFromFb(Position position) {
+        moveCoin(position.getLastRow(), position.getLastCol(),position.getNewRow(),position.getNewCol());
+        switchTurn();
     }
 }

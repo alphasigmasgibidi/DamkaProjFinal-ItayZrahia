@@ -1,27 +1,27 @@
 package com.example.damkaprojfinal_itayzrahia;
 
 public class Position {
-    private int lastLine;
+    private int lastRow;
     private int lastCol;
-    private  int newLine;
+    private  int newRow;
     private int newCol;
 
     public Position() {
     }
 
-    public Position(int lastLine, int lastCol, int newLine, int newCol) {
-        this.lastLine = lastLine;
+    public Position(int lastRow, int lastCol, int newRow, int newCol) {
+        this.lastRow = lastRow;
         this.lastCol = lastCol;
-        this.newLine = newLine;
+        this.newRow = newRow;
         this.newCol = newCol;
     }
 
-    public int getLastLine() {
-        return lastLine;
+    public int getLastRow() {
+        return lastRow;
     }
 
-    public void setLastLine(int lastLine) {
-        this.lastLine = lastLine;
+    public void setLastRow(int lastRow) {
+        this.lastRow = lastRow;
     }
 
     public int getLastCol() {
@@ -32,12 +32,12 @@ public class Position {
         this.lastCol = lastCol;
     }
 
-    public int getNewLine() {
-        return newLine;
+    public int getNewRow() {
+        return newRow;
     }
 
-    public void setNewLine(int newLine) {
-        this.newLine = newLine;
+    public void setNewRow(int newRow) {
+        this.newRow = newRow;
     }
 
     public int getNewCol() {

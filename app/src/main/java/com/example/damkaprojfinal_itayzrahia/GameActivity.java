@@ -12,12 +12,13 @@ public class GameActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
-        String mode = getIntent().getStringExtra("mode");
-        boardGame = new BoardGame(this, mode);
-        setContentView(boardGame);
-
         fbModule = new FbModule(this);
         fbModule.setPositionInFirebase(new Position(1,2,3,4));
+
+        String mode = getIntent().getStringExtra("mode");
+        boardGame = new BoardGame(this, mode, fbModule);
+        setContentView(boardGame);
+
     }
 
     public void setPositionFromFb(Position position) {
