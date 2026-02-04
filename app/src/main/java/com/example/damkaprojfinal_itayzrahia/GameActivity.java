@@ -3,25 +3,25 @@ package com.example.damkaprojfinal_itayzrahia;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameActivity extends AppCompatActivity
-{
+public class GameActivity extends AppCompatActivity {
     FbModule fbModule;
     BoardGame boardGame;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fbModule = new FbModule(this);
-        fbModule.setPositionInFirebase(new Position(1,2,3,4));
-
         String mode = getIntent().getStringExtra("mode");
+        fbModule = new FbModule(this);
+
         boardGame = new BoardGame(this, mode, fbModule);
         setContentView(boardGame);
-
     }
 
+    // זו הפעולה ש-FbModule קורא לה כשמגיע מידע חדש
     public void setPositionFromFb(Position position) {
-        boardGame.setPositionFromFb(position);
+        if (boardGame != null) {
+            boardGame.moveCoin(position);
+        }
     }
 }
