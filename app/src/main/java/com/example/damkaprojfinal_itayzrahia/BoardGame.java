@@ -18,7 +18,7 @@ public class BoardGame extends View {
 
     private String mode;
     private int myTeam; // מי אני? אדום או לבן
-    private GameModule engine;
+    private GameModule gameModule;
     private FbModule fb;
 
     public BoardGame(Context context, String mode, FbModule fb) {
@@ -27,7 +27,7 @@ public class BoardGame extends View {
         this.fb = fb;
         this.squares = new Square[8][8];
         this.coins = new ArrayList<Coin>();
-        this.engine = new GameModule();
+        this.gameModule = new GameModule();
 
         // קביעת הצוות לפי המוד מה-Intent
         if (mode.equals("playerwhite")) {
@@ -120,7 +120,7 @@ public class BoardGame extends View {
                 Coin c = coins.get(i);
                 if (c.didUserTouchMe(tx, ty) == true) {
                     // בדיקה: האם זה המטבע שלי והאם זה התור שלי?
-                    if (c.team == myTeam && engine.isTurnCorrect(c.team) == true) {
+                    if (c.team == myTeam && gameModule.isTurnCorrect(c.team) == true) {
                         activeCoin = c;
                     }
                     break;
@@ -141,7 +141,7 @@ public class BoardGame extends View {
                 int targetRow = (int) ((ty - BOARD_STARTS_FROM) / tileSize);
                 int targetCol = (int) (tx / tileSize);
 
-                int moveType = engine.checkMove(activeCoin, targetRow, targetCol, coins);
+                int moveType = gameModule.checkMove(activeCoin, targetRow, targetCol, coins);
 
                 if (moveType == 0) {
                     // מהלך לא חוקי - חזור למקום
@@ -181,6 +181,7 @@ public class BoardGame extends View {
                 for (int i = 0; i < coins.size(); i++) {
                     if (coins.get(i).row == midR && coins.get(i).col == midC) {
                         coins.remove(i);
+                        // TODO: 18/02/2026 add animation - Israel 
                         break;
                     }
                 }
@@ -195,7 +196,7 @@ public class BoardGame extends View {
             coinToMove.lastY = coinToMove.y;
 
             // החלפת תור ורענון מסך
-            engine.toggleTurn();
+            gameModule.toggleTurn();
             invalidate();
         }
     }
