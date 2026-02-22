@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
     FbModule fbModule;
-    BoardGame boardGame;
+    GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,14 +14,14 @@ public class GameActivity extends AppCompatActivity {
         String mode = getIntent().getStringExtra("mode");
         fbModule = new FbModule(this);
 
-        boardGame = new BoardGame(this, mode, fbModule);
-        setContentView(boardGame);
+        gameView = new GameView(this, mode, fbModule);
+        setContentView(gameView);
     }
 
     // זו הפעולה ש-FbModule קורא לה כשמגיע מידע חדש
     public void setPositionFromFb(Position position) {
-        if (boardGame != null) {
-            boardGame.moveCoin(position);
+        if (gameView != null) {
+            gameView.moveCoin(position);
         }
     }
 }

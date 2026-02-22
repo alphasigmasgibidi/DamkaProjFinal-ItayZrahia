@@ -5,17 +5,18 @@ import android.graphics.Paint;
 
 public class Coin extends Shape
 {
-    public float r;
+    public float radius;
     private Paint p;
     public float lastX, lastY;
-    public int team; // 1 = White, -1 = Red
-    public int row, col; // Logical position on grid
+    public int team;
+    public int row, col;
     public static final int TEAM_RED = -1;
     public static final int TEAM_WHITE = 1;
-    public Coin(float x, float y, float r, int color, int team, int row, int col)
+
+    public Coin(float x, float y, float radius, int color, int team, int row, int col)
     {
         super(x, y, color);
-        this.r = r;
+        this.radius = radius;
         this.team = team;
         this.row = row;
         this.col = col;
@@ -29,20 +30,18 @@ public class Coin extends Shape
     @Override
     public void draw(Canvas canvas)
     {
-        canvas.drawCircle(x, y, r, p);
+        canvas.drawCircle(x, y, radius, p);
     }
 
     public boolean didUserTouchMe(float xu, float yu)
     {
         double distance = Math.sqrt(Math.pow((x - xu), 2) + Math.pow((y - yu), 2));
 
-        if (distance < r)
+        if (distance < radius)
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 }
