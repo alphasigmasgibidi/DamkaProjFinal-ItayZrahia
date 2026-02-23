@@ -35,7 +35,7 @@ public class Coin extends Shape
 
     public boolean didUserTouchMe(float xu, float yu)
     {
-        double distance = Math.sqrt(Math.pow((x - xu), 2) + Math.pow((y - yu), 2));
+       double distance = Math.sqrt(Math.pow((x - xu), 2) + Math.pow((y - yu), 2));
 
         if (distance < radius)
         {

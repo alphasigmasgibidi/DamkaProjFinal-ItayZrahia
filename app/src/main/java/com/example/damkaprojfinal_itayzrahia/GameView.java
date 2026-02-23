@@ -72,9 +72,9 @@ public class GameView extends View
         float x = 0;
         float y = BOARD_STARTS_FROM;
 
-        for (int r = 0; r < 8; r++)
+        for (int r = 0; r < 8; r++) //rowVertical
         {
-            for (int c = 0; c < 8; c++)
+            for (int c = 0; c < 8; c++) //colHorizontal
             {
                 int color;
                 if ((r + c) % 2 == 0)
@@ -97,22 +97,23 @@ public class GameView extends View
     private void initCoins()
     {
         float radius = tileSize / 3;
-        for (int r = 0; r < 8; r++)
+
+        for (int r = 0; r < 8; r++) //rowVertical
         {
-            for (int c = 0; c < 8; c++)
+            for (int c = 0; c < 8; c++) //colHorizontal
             {
                 if ((r + c) % 2 != 0)
                 {
-                    float cx = c * tileSize + tileSize / 2;
-                    float cy = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
+                    float coin1st_X = c * tileSize + tileSize / 2;
+                    float coin1st_Y = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
 
-                    if (r < 3)
+                    if (r < 3) //top of board
                     {
-                        coins.add(new Coin(cx, cy, radius, Color.RED, Coin.TEAM_RED, r, c));
+                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.RED, Coin.TEAM_RED, r, c));
                     }
-                    else if (r > 4)
+                    else if (r > 4) //down the board
                     {
-                        coins.add(new Coin(cx, cy, radius, Color.WHITE, Coin.TEAM_WHITE, r, c));
+                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.WHITE, Coin.TEAM_WHITE, r, c));
                     }
                 }
             }
@@ -121,9 +122,9 @@ public class GameView extends View
 
     private void drawBoard(Canvas canvas)
     {
-        for (int r = 0; r < 8; r++)
+        for (int r = 0; r < 8; r++) //rowVertical
         {
-            for (int c = 0; c < 8; c++)
+            for (int c = 0; c < 8; c++) //colHorizontal
             {
                 squares[r][c].draw(canvas);
             }
@@ -141,15 +142,15 @@ public class GameView extends View
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        float tx = event.getX();
-        float ty = event.getY();
+        float touchX = event.getX();
+        float touchY = event.getY();
 
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
             for (int i = 0; i < coins.size(); i++)
             {
                 Coin c = coins.get(i);
-                if (c.didUserTouchMe(tx, ty))
+                if (c.didUserTouchMe(touchX, touchY))
                 {
                     if (c.team == myTeam)
                     {
@@ -167,8 +168,8 @@ public class GameView extends View
         {
             if (activeCoin != null)
             {
-                activeCoin.x = tx;
-                activeCoin.y = ty;
+                activeCoin.x = touchX;
+                activeCoin.y = touchY;
                 invalidate();
             }
         }
@@ -177,8 +178,8 @@ public class GameView extends View
         {
             if (activeCoin != null)
             {
-                int targetR = (int) ((ty - BOARD_STARTS_FROM) / tileSize);
-                int targetC = (int) (tx / tileSize);
+                int targetR = (int) ((touchY - BOARD_STARTS_FROM) / tileSize);
+                int targetC = (int) (touchX / tileSize);
 
                 int moveResult = gameModule.checkMove(activeCoin, targetR, targetC, coins);
 
