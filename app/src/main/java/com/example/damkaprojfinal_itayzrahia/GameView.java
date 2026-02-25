@@ -18,7 +18,7 @@ public class GameView extends View
     public static float BOARD_STARTS_FROM;
 
     private String mode;
-    private int myTeam;
+    public static int myTeam;
     private GameModule gameModule;
     private FbModule fb;
 
@@ -298,5 +298,9 @@ public class GameView extends View
                 postInvalidate();
             }
         }).start();
+    }
+
+    public int isWin() {
+        return gameModule.isWin();
     }
 }

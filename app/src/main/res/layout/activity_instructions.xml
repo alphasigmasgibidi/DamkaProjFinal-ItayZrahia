@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2B2B2B">
+    android:background="#121212">
 
     <Button
         android:id="@+id/btnBack"
@@ -11,21 +11,70 @@
         android:layout_height="wrap_content"
         android:text="חזור"
         android:backgroundTint="#B71C1C"
-        android:layout_margin="20dp"
+        android:layout_margin="16dp"
+        android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:onClick="onBackClick"/>
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="הוראות"
+        android:text="עושים סדר בלוח"
         android:textColor="#D32F2F"
-        android:textSize="45sp"
+        android:textSize="32sp"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="20dp"
+        android:padding="15dp"
+        android:background="#1E1E1E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#E0E0E0"
+                android:textSize="17sp"
+                android:lineSpacingExtra="6dp"
+                android:gravity="right"
+                android:text="ברוכים הבאים לדמקה של איתי! בואו נסגור פינות כדי שלא תעשו פדיחות מול המחשב:\n\n
+🔹 **איך מתחילים?**\n
+לחץ על הכפתור שכתוב עליו **'שחק לבן'** בשביל לפתוח את המשחק בתור השחקן הראשון. אם אתה מרגיש הרפתקן, לחץ על הכפתור **'שחק אדום'** כדי לשחק בתור השחקן השני.\n\n
+🔹 **לבד מול המכונה?**\n
+לחץ על הכפתור שכתוב עליו **'בינה מלאכותית'** בשביל לראות אם אתה חכם יותר מהקוד שכתבתי. המלצה שלי: אל תזלזל בו.\n\n
+🔹 **מה הכללים בתכלס?**\n
+גוררים את הדיסקיות רק באלכסון על הריבועים השחורים. זיהית דיסקית של היריב עם ריבוע ריק מאחוריה? פשוט 'תדלג' מעליה והיא עפה מהלוח. בתיאבון!\n\n
+🔹 **מתי הופכים למלך?**\n
+ברגע שהגעת לשורה האחרונה של היריב, הכלי שלך הופך למלך. מלך יכול לזוז גם אחורה – כי בכל זאת, הוא הבוס.\n\n
+🔹 **למה להירשם?**\n
+לחץ על הכפתור שכתוב עליו **'הרשמה'** בשביל לפתוח חשבון ולהתחבר לפיירבייס. ככה נוכל לזהות אותך כשאתה מפרק חברים ברשת.\n\n
+🔹 **נתקעת?**\n
+הכפתור **'הוראות'** יחזיר אותך להסברים, אבל בינינו – הדרך הכי טובה ללמוד היא פשוט להתחיל להזיז כלים.\n\n
+**טיפ קטן:** תשמרו על השורות האחוריות שלכם סגורות כמה שיותר זמן. חבל שהיריב יקבל מלך בחינם.\n\n
+יאללה, פחות דיבורים, יותר מהלכים. שיהיה בהצלחה!" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

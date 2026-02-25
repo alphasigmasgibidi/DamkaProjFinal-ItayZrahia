@@ -6,11 +6,12 @@ public class GameModule
 {
     public int currentTurn = Coin.TEAM_WHITE;
 
-    public static final int ILEGAL_MOVE = 0;
-    public static final int REGULAR_MOVE = 1;
-    public static final int EAT_MOVE = 2;
+    public static final int MOVE_ILEGAL = 0;
+    public static final int MOVE_REGULAR = 1;
+    public static final int MOVE_EAT = 2;
 
-    public static int MOVE_TYPE = 0;
+
+    
 
     public boolean isMyTurn(int team)
     {
@@ -37,12 +38,12 @@ public class GameModule
     {
         if (rNEW < 0 || rNEW > 7 || cNEW < 0 || cNEW > 7)
         {
-            return ILEGAL_MOVE;
+            return MOVE_ILEGAL;
         }
 
         if ((rNEW + cNEW) % 2 == 0)
         {
-            return ILEGAL_MOVE;
+            return MOVE_ILEGAL;
         }
 
         for (int i = 0; i < all.size(); i++)
@@ -51,7 +52,7 @@ public class GameModule
             {
                 if (all.get(i).col == cNEW)
                 {
-                    return ILEGAL_MOVE;
+                    return MOVE_ILEGAL;
                 }
             }
         }
@@ -65,7 +66,7 @@ public class GameModule
         {
             if (dr >= 0)
             {
-                return ILEGAL_MOVE;
+                return MOVE_ILEGAL;
             }
         }
 
@@ -73,7 +74,7 @@ public class GameModule
         {
             if (dr <= 0)
             {
-                return ILEGAL_MOVE;
+                return MOVE_ILEGAL;
             }
         }
 
@@ -93,7 +94,7 @@ public class GameModule
         {
             if (absC == 1)
             {
-                return REGULAR_MOVE;
+                return MOVE_REGULAR;
             }
         }
 
@@ -112,7 +113,7 @@ public class GameModule
                         {
                             if (all.get(i).team != c.team)
                             {
-                                return EAT_MOVE;
+                                return MOVE_EAT;
                             }
                         }
                     }
@@ -120,6 +121,10 @@ public class GameModule
             }
         }
 
-        return EAT_MOVE;
+        return MOVE_EAT;
+    }
+
+    public int isWin() {
+
     }
 }
