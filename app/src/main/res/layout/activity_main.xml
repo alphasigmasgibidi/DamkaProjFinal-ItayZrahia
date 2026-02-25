@@ -77,6 +77,15 @@
             android:backgroundTint="#E0E0E0"
             android:textColor="#2B2B2B"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by ITAY ZRAHIA"
+            android:textColor="#5F1C1C"
+            android:textSize="10sp"
+            android:textStyle="bold|italic"
+            android:layout_marginTop="10dp"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,12 @@ public class GameModule
 {
     public int currentTurn = Coin.TEAM_WHITE;
 
+    public static final int ILEGAL_MOVE = 0;
+    public static final int REGULAR_MOVE = 1;
+    public static final int EAT_MOVE = 2;
+
+    public static int MOVE_TYPE = 0;
+
     public boolean isMyTurn(int team)
     {
         if (team == currentTurn)
@@ -27,39 +33,39 @@ public class GameModule
         }
     }
 
-    public int checkMove(Coin c, int r2, int c2, ArrayList<Coin> all)
+    public int checkMove(Coin c, int rNEW, int cNEW, ArrayList<Coin> all)
     {
-        if (r2 < 0 || r2 > 7 || c2 < 0 || c2 > 7)
+        if (rNEW < 0 || rNEW > 7 || cNEW < 0 || cNEW > 7)
         {
-            return 0;
+            return ILEGAL_MOVE;
         }
 
-        if ((r2 + c2) % 2 == 0)
+        if ((rNEW + cNEW) % 2 == 0)
         {
-            return 0;
+            return ILEGAL_MOVE;
         }
 
         for (int i = 0; i < all.size(); i++)
         {
-            if (all.get(i).row == r2)
+            if (all.get(i).row == rNEW)
             {
-                if (all.get(i).col == c2)
+                if (all.get(i).col == cNEW)
                 {
-                    return 0;
+                    return ILEGAL_MOVE;
                 }
             }
         }
 
         int r1 = c.row;
         int c1 = c.col;
-        int dr = r2 - r1;
-        int dc = c2 - c1;
+        int dr = rNEW - r1;
+        int dc = cNEW - c1;
 
         if (c.team == Coin.TEAM_WHITE)
         {
             if (dr >= 0)
             {
-                return 0;
+                return ILEGAL_MOVE;
             }
         }
 
@@ -67,7 +73,7 @@ public class GameModule
         {
             if (dr <= 0)
             {
-                return 0;
+                return ILEGAL_MOVE;
             }
         }
 
@@ -87,7 +93,7 @@ public class GameModule
         {
             if (absC == 1)
             {
-                return 1;
+                return REGULAR_MOVE;
             }
         }
 
@@ -95,8 +101,8 @@ public class GameModule
         {
             if (absC == 2)
             {
-                int midR = (r1 + r2) / 2;
-                int midC = (c1 + c2) / 2;
+                int midR = (r1 + rNEW) / 2;
+                int midC = (c1 + cNEW) / 2;
 
                 for (int i = 0; i < all.size(); i++)
                 {
@@ -106,7 +112,7 @@ public class GameModule
                         {
                             if (all.get(i).team != c.team)
                             {
-                                return 2;
+                                return EAT_MOVE;
                             }
                         }
                     }
@@ -114,6 +120,6 @@ public class GameModule
             }
         }
 
-        return 0;
+        return EAT_MOVE;
     }
 }
