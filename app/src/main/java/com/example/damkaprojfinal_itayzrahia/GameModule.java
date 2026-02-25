@@ -126,5 +126,6 @@ public class GameModule
 
     public int isWin() {
 
+        return 1;
     }
 }
