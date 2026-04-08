@@ -21,7 +21,6 @@ public class GameActivity extends AppCompatActivity {
         setContentView(gameView);
     }
 
-    // זו הפעולה ש-FbModule קורא לה כשמגיע מידע חדש
     public void setPositionFromFb(Position position) {
         if (gameView != null) {
             gameView.moveCoin(position);
@@ -34,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "YOU LOSE", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "WHITE WINS", Toast.LENGTH_SHORT).show();
                 }
             }
             else
@@ -45,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "YOU LOSE", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "RED WINS", Toast.LENGTH_SHORT).show();
                 }
             }
         }

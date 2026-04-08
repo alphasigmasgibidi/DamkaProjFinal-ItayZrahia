@@ -124,8 +124,18 @@ public class GameModule
         return MOVE_EAT;
     }
 
-    public int isWin() {
+    public int checkWinner(ArrayList<Coin> allCoins) {
+        boolean isWhiteAlive = false;
+        boolean isRedAlive = false;
 
-        return 1;
+        for (Coin c : allCoins) {
+            if (c.team == Coin.TEAM_WHITE) isWhiteAlive = true;
+            if (c.team == Coin.TEAM_RED) isRedAlive = true;
+        }
+
+        if (!isRedAlive) return Coin.TEAM_WHITE;
+        if (!isWhiteAlive) return Coin.TEAM_RED;
+
+        return 0;
     }
 }

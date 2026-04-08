@@ -98,9 +98,9 @@ public class GameView extends View
     {
         float radius = tileSize / 3;
 
-        for (int r = 0; r < 8; r++) //rowVertical
+        for (int r = 0; r < 8; r++) //row = Vertical
         {
-            for (int c = 0; c < 8; c++) //colHorizontal
+            for (int c = 0; c < 8; c++) //col = Horizontal
             {
                 if ((r + c) % 2 != 0)
                 {
@@ -111,7 +111,7 @@ public class GameView extends View
                     {
                         coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.RED, Coin.TEAM_RED, r, c));
                     }
-                    else if (r > 4) //down the board
+                    else if (r > 4) //bottom of board
                     {
                         coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.WHITE, Coin.TEAM_WHITE, r, c));
                     }
@@ -122,9 +122,9 @@ public class GameView extends View
 
     private void drawBoard(Canvas canvas)
     {
-        for (int r = 0; r < 8; r++) //rowVertical
+        for (int r = 0; r < 8; r++) //row = Vertical
         {
-            for (int c = 0; c < 8; c++) //colHorizontal
+            for (int c = 0; c < 8; c++) //col = Horizontal
             {
                 squares[r][c].draw(canvas);
             }
@@ -301,6 +301,7 @@ public class GameView extends View
     }
 
     public int isWin() {
-        return gameModule.isWin();
+
+        return gameModule.checkWinner(this.coins);
     }
 }
