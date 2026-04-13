@@ -36,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
                     Toast.makeText(this, "WHITE WINS", Toast.LENGTH_SHORT).show();
                 }
             }
-            else
+            if (gameView.isWin() == Coin.TEAM_RED)
             {
                 if(GameView.myTeam == Coin.TEAM_RED)
                 {

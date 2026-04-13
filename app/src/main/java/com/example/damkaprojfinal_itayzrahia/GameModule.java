@@ -125,16 +125,16 @@ public class GameModule
     }
 
     public int checkWinner(ArrayList<Coin> allCoins) {
-        boolean isWhiteAlive = false;
-        boolean isRedAlive = false;
+        boolean doesWhiteExist = false;
+        boolean doesRedExist = false;
 
         for (Coin c : allCoins) {
-            if (c.team == Coin.TEAM_WHITE) isWhiteAlive = true;
-            if (c.team == Coin.TEAM_RED) isRedAlive = true;
+            if (c.team == Coin.TEAM_WHITE) doesWhiteExist = true;
+            if (c.team == Coin.TEAM_RED) doesRedExist = true;
         }
 
-        if (!isRedAlive) return Coin.TEAM_WHITE;
-        if (!isWhiteAlive) return Coin.TEAM_RED;
+        if (!doesRedExist) return Coin.TEAM_WHITE;
+        if (!doesWhiteExist) return Coin.TEAM_RED;
 
         return 0;
     }
