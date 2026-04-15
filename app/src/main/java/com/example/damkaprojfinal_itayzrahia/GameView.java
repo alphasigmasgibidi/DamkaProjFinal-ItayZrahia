@@ -257,6 +257,14 @@ public class GameView extends View
 
     private void animateAndRemoveCoin(final Coin eatenCoin)
     {
+        Coin temp = new Coin(eatenCoin); // itay note- -* important *- this process of copying the eatencoin is for a reason:
+        // because the Thread runs separately for the animation process,
+        // The program that summoned "movecoin" that than summoned "animateAndRemoveCoin" -
+        // will keep runnning and ask questions if though eatencoin is already removed from the arraylist.
+        // that's why we need to remove it before we get to the thread.
+
+        coins.remove(eatenCoin);
+
         eatenCoin.row = -1;
         eatenCoin.col = -1;
 
@@ -269,7 +277,7 @@ public class GameView extends View
                 float targetY;
                 float currentSpeed;
 
-                if (eatenCoin.team == Coin.TEAM_WHITE)
+                if (temp.team == Coin.TEAM_WHITE)
                 {
                     targetY = -200;
                     currentSpeed = -speed;
@@ -280,9 +288,9 @@ public class GameView extends View
                     currentSpeed = speed;
                 }
 
-                while ((currentSpeed < 0 && eatenCoin.y > targetY) || (currentSpeed > 0 && eatenCoin.y < targetY))
+                while ((currentSpeed < 0 && temp.y > targetY) || (currentSpeed > 0 && temp.y < targetY))
                 {
-                    eatenCoin.y += currentSpeed;
+                    temp.y += currentSpeed;
                     postInvalidate();
 
                     try
@@ -294,7 +302,7 @@ public class GameView extends View
                     }
                 }
 
-                coins.remove(eatenCoin);
+                coins.remove(temp);
                 postInvalidate();
             }
         }).start();

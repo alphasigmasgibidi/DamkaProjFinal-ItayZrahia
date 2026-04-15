@@ -27,6 +27,21 @@ public class Coin extends Shape
         this.p.setColor(color);
     }
 
+    public Coin(Coin other)
+    {
+        super(other.x, other.y, other.color);
+
+        this.radius = other.radius;
+        this.team = other.team;
+        this.row = other.row;
+        this.col = other.col;
+
+        this.lastX = other.x;
+        this.lastY = other.y;
+        this.p = new Paint();
+        this.p.setColor(other.color);
+    }
+
     @Override
     public void draw(Canvas canvas)
     {
