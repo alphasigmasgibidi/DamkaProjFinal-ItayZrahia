@@ -79,11 +79,11 @@ public class GameView extends View
                 int color;
                 if ((r + c) % 2 == 0)
                 {
-                    color = Color.parseColor("#C0C0C0");
+                    color = Color.parseColor("#ebd3ac"); //light
                 }
                 else
                 {
-                    color = Color.parseColor("#800000");
+                    color = Color.parseColor("#a17e5d"); //dark
                 }
 
                 squares[r][c] = new Square(x, y, tileSize, tileSize, color);
@@ -109,11 +109,11 @@ public class GameView extends View
 
                     if (r < 1) //top of board
                     {
-                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.RED, Coin.TEAM_RED, r, c));
+                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#5b5b59"), Coin.TEAM_RED, r, c));
                     }
                     else if (r > 4) //bottom of board
                     {
-                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.WHITE, Coin.TEAM_WHITE, r, c));
+                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#e1e6e0"), Coin.TEAM_WHITE, r, c));
                     }
                 }
             }

@@ -36,6 +36,13 @@ public class GameModule
 
     public int checkMove(Coin c, int row_NEW, int col_NEW, ArrayList<Coin> all)
     {
+        King k = new King(all.remove(5));
+        all.add(5,k);
+        King kimK = new King(all.remove(1));
+        all.add(1,kimK);
+
+
+
         if (col_NEW < 0 || row_NEW > 7 || row_NEW < 0 || col_NEW > 7) //-*Checks if coin is placed inside the board*-
         {
             return MOVE_ILEGAL;
