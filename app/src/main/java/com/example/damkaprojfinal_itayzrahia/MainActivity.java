@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private Button btnPlayWhite, btnPlayRed, btnPlayAI, btnInstructions, btnSettings, btnRegister;
+    private Button btnPlay, btnInstructions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -16,54 +16,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnPlayWhite = findViewById(R.id.btnPlayWhite);
-        btnPlayRed = findViewById(R.id.btnPlayRed);
-        btnPlayAI = findViewById(R.id.btnPlayAI);
+        btnPlay = findViewById(R.id.btnPlay);
         btnInstructions = findViewById(R.id.btnInstructions);
-        btnSettings = findViewById(R.id.btnSettings);
-        btnRegister = findViewById(R.id.btnRegister);
 
-        btnPlayWhite.setOnClickListener(this);
-        btnPlayRed.setOnClickListener(this);
-        btnPlayAI.setOnClickListener(this);
+
+        btnPlay.setOnClickListener(this);
         btnInstructions.setOnClickListener(this);
-        btnSettings.setOnClickListener(this);
-        btnRegister.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v)
     {
-        if (v == btnPlayWhite || v == btnPlayRed || v == btnPlayAI)
+        if (v == btnPlay)
         {
-            Intent intent = new Intent(this, GameActivity.class);
-
-            if (v == btnPlayWhite)
-            {
-                intent.putExtra("mode", "playerwhite");
-            }
-            if (v == btnPlayRed)
-            {
-                intent.putExtra("mode", "playerred");
-            }
-            if (v == btnPlayAI)
-            {
-                intent.putExtra("mode", "ai");
-            }
-
-            startActivity(intent);
+            // במקום לעבור ישר למסך, נפתח דיאלוג לבחירת צבע
+            showColorSelectionDialog();
         }
         else if (v == btnInstructions)
         {
             startActivity(new Intent(this, InstructionsActivity.class));
         }
-        else if (v == btnSettings)
-        {
-            startActivity(new Intent(this, SettingsActivity.class));
-        }
-        else if (v == btnRegister)
-        {
-            startActivity(new Intent(this, RegisterActivity.class));
-        }
     }
+
+    private void showColorSelectionDialog() {
+        String[] colors = {"שחקן לבן", "שחקן אדום"};
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("בחר באיזה צד אתה");
+
+        builder.setItems(colors, (dialog, which) -> {
+            Intent intent = new Intent(this, GameActivity.class);
+
+            if (which == 0) { // לבן
+                intent.putExtra("mode", "playerwhite");
+            } else { // אדום
+                intent.putExtra("mode", "playerred");
+            }
+
+            startActivity(intent);
+        });
+
+        builder.setNegativeButton("ביטול", null);
+        builder.show();
+    }
+
 }

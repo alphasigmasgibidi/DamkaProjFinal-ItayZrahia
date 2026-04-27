@@ -22,7 +22,7 @@ public class King extends Coin{
             this.color = Color.parseColor("#e6b941");
         }
 
-        this.type = "King";
+        this.type = "King"; //we name them so we can identify them
 
 
         p.setColor(color);

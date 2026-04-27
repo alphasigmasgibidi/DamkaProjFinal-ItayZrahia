@@ -17,7 +17,9 @@ public class Coin extends Shape
     public Coin(float x, float y, float radius, int color, int team, int row, int col)
     {
         super(x, y, color);
-        this.type = "Coin";
+
+        this.type = "Coin"; //we name them so we can identify them
+
         this.radius = radius;
         this.team = team;
         this.row = row;

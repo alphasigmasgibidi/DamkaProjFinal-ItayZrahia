@@ -36,8 +36,12 @@ public class GameModule
 
     public int checkMove(Coin c, int row_NEW, int col_NEW, ArrayList<Coin> all)
     {
-        int index = all.indexOf(c);
-        if (all.get(index).)
+
+        King k = new King(all.remove(5));
+        all.add(5, k);
+        King kimk = new King(all.remove(2));
+        all.add(2, kimk);
+
         if (col_NEW < 0 || row_NEW > 7 || row_NEW < 0 || col_NEW > 7) //-*Checks if coin is placed inside the board*-
         {
             return MOVE_ILEGAL;
@@ -68,6 +72,31 @@ public class GameModule
         
         int col_HEFRESH = col_NEW - col_CURRENT;
 
+
+        int row_HEFRESH_ABSOLUTE = row_HEFRESH;
+
+
+        if (row_HEFRESH_ABSOLUTE < 0) // making the row_HEFRESH a positive number always
+        {
+            row_HEFRESH_ABSOLUTE = -row_HEFRESH_ABSOLUTE;
+        }
+
+
+        int col_HEFRESH_ABSOLUTE = col_HEFRESH;
+
+
+        if (col_HEFRESH_ABSOLUTE < 0) // making the col_HEFRESH a positive number always
+        {
+            col_HEFRESH_ABSOLUTE = -col_HEFRESH_ABSOLUTE;
+        }
+
+
+        int index = all.indexOf(c); // For The sake of tidy code we split the moves
+        if (all.get(index).type == "king")
+        {
+            return checkMoveIfKing(c, row_NEW, col_NEW, all, row_HEFRESH_ABSOLUTE, col_HEFRESH_ABSOLUTE, row_CURRENT, col_CURRENT );
+        }
+
         if (c.team == Coin.TEAM_WHITE) // if there's a jump of more than one square for WHITE
         {
             if (row_HEFRESH >= 0)
@@ -82,23 +111,6 @@ public class GameModule
             {
                 return MOVE_ILEGAL;
             }
-        }
-
-        int row_HEFRESH_ABSOLUTE = row_HEFRESH; 
-        
-        
-        if (row_HEFRESH_ABSOLUTE < 0) // making the row_HEFRESH a positive number always
-        {
-            row_HEFRESH_ABSOLUTE = -row_HEFRESH_ABSOLUTE;
-        }
-
-        
-        int col_HEFRESH_ABSOLUTE = col_HEFRESH; 
-        
-        
-        if (col_HEFRESH_ABSOLUTE < 0) // making the col_HEFRESH a positive number always
-        {
-            col_HEFRESH_ABSOLUTE = -col_HEFRESH_ABSOLUTE;
         }
 
         if (row_HEFRESH_ABSOLUTE == 1)
@@ -133,6 +145,33 @@ public class GameModule
         }
 
         return MOVE_ILEGAL;
+    }
+
+    public int checkMoveIfKing(Coin c, int row_NEW, int col_NEW, ArrayList<Coin> all, int row_HEFRESH_ABSOLUTE, int col_HEFRESH_ABSOLUTE, int row_CURRENT, int col_CURRENT ) {
+
+        if (row_HEFRESH_ABSOLUTE == col_HEFRESH_ABSOLUTE)
+        {
+                int midR = (row_CURRENT + row_NEW) - 1;
+                int midC = (col_CURRENT + col_NEW) - 1;
+
+                for (int i = 0; i < all.size(); i++)
+                {
+                    if (all.get(i).row == midR)
+                    {
+                        if (all.get(i).col == midC)
+                        {
+                            if (all.get(i).team != c.team)
+                            {
+                                return MOVE_EAT;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        return MOVE_REGULAR;
+
     }
 
     public int checkWinner(ArrayList<Coin> allCoins) {
