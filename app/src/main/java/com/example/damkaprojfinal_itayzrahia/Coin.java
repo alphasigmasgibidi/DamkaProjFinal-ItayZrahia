@@ -5,6 +5,7 @@ import android.graphics.Paint;
 
 public class Coin extends Shape
 {
+    public String type = "";
     public float radius;
     private Paint p;
     public float lastX, lastY;
@@ -16,6 +17,7 @@ public class Coin extends Shape
     public Coin(float x, float y, float radius, int color, int team, int row, int col)
     {
         super(x, y, color);
+        this.type = "Coin";
         this.radius = radius;
         this.team = team;
         this.row = row;
