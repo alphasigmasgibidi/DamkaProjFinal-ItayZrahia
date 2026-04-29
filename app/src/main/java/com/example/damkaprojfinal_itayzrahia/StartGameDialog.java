@@ -1,18 +1,24 @@
 package com.example.damkaprojfinal_itayzrahia;
 
-import android.content.Intent;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class StartGameDialog extends AppCompatActivity implements View.OnClickListener {
+public class StartGameDialog extends Dialog implements View.OnClickListener {
 
     private Button btnWhite, btnRed;
+    private MainActivity mainActivity;
+
+    public StartGameDialog(MainActivity activity) {
+        super(activity);
+        this.mainActivity = activity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.dialog_start_game_);
 
         btnWhite = findViewById(R.id.btnWhite);
         btnRed = findViewById(R.id.btnRed);
@@ -23,13 +29,11 @@ public class StartGameDialog extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        Intent resultIntent = new Intent();
         if (v == btnWhite) {
-            resultIntent.putExtra("mode", "playerwhite");
+            mainActivity.startGameByTeam(Coin.TEAM_WHITE);
         } else if (v == btnRed) {
-            resultIntent.putExtra("mode", "playerred");
+            mainActivity.startGameByTeam(Coin.TEAM_RED);
         }
-        setResult(RESULT_OK, resultIntent);
-        finish();
+        dismiss();
     }
 }
