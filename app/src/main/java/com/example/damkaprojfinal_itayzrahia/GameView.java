@@ -107,11 +107,11 @@ public class GameView extends View
                     float coin1st_X = c * tileSize + tileSize / 2;
                     float coin1st_Y = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
 
-                    if (r < 1) //top of board
+                    if (r < 3) //top of board (Silver Team Pieces)
                     {
                         coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#5b5b59"), Coin.TEAM_RED, r, c));
                     }
-                    else if (r > 4) //bottom of board
+                    else if (r > 4) //bottom of board (Gold Team Pieces)
                     {
                         coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#e1e6e0"), Coin.TEAM_WHITE, r, c));
                     }
@@ -257,12 +257,7 @@ public class GameView extends View
 
     private void animateAndRemoveCoin(final Coin eatenCoin)
     {
-        Coin temp = new Coin(eatenCoin); // itay note- -* important *- this process of copying the eatencoin is for a reason:
-        // because the Thread runs separately for the animation process,
-        // The program that summoned "movecoin" that than summoned "animateAndRemoveCoin" -
-        // will keep runnning and ask questions if though eatencoin is already removed from the arraylist.
-        // that's why we need to remove it before we get to the thread.
-
+        Coin temp = new Coin(eatenCoin);
         coins.remove(eatenCoin);
 
         eatenCoin.row = -1;
@@ -309,7 +304,6 @@ public class GameView extends View
     }
 
     public int isWin() {
-
         return gameModule.checkWinner(this.coins);
     }
 }

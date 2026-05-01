@@ -15,7 +15,7 @@ public class King extends Coin{
 
         if (this.team == TEAM_RED)
         {
-            this.color = Color.parseColor("#8bd4e0");
+            this.color = Color.parseColor("#ABABAB");
         }
         else
         {

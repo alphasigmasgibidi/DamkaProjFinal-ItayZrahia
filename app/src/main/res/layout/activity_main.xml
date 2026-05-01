@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DAMKA"
-            android:textColor="#D32F2F"
+            android:textColor="#e6b941"
             android:textSize="55sp"
             android:textStyle="bold"
             android:layout_marginBottom="50dp"/>
@@ -29,8 +29,8 @@
             android:layout_width="260dp"
             android:layout_height="55dp"
             android:text="משחק חדש"
-            android:backgroundTint="#E0E0E0"
-            android:textColor="#2B2B2B"
+            android:backgroundTint="#e6b941"
+            android:textColor="#1A1A1A"
             android:layout_marginBottom="12dp"/>
 
 
@@ -39,16 +39,16 @@
             android:layout_width="220dp"
             android:layout_height="50dp"
             android:text="הוראות"
-            android:backgroundTint="#E0E0E0"
-            android:textColor="#2B2B2B"
+            android:backgroundTint="#ABABAB"
+            android:textColor="#1A1A1A"
             android:layout_marginBottom="10dp"/>
 
-      
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="by ITAY ZRAHIA"
-            android:textColor="#5F1C1C"
+            android:textColor="#a17e5d"
             android:textSize="10sp"
             android:textStyle="bold|italic"
             android:layout_marginTop="10dp"/>
