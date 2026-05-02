@@ -1,66 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A1A1A">
+    android:background="#1A1A1A"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginBottom="50dp"
+        android:text="DAMKA"
+        android:textColor="#ffc9d4"
+        android:textSize="55sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAMKA"
-            android:textColor="#ffc9d4"
-            android:textSize="55sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="50dp"/>
+    <Button
+        android:id="@+id/btnNewGame"
+        android:layout_width="260dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#fddc5c"
+        android:text="משחק חדש"
+        android:textColor="#1A1A1A"
+        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnPlay"
-            android:layout_width="260dp"
-            android:layout_height="55dp"
-            android:text="משחק חדש"
-            android:backgroundTint="#fddc5c"
-            android:textColor="#1A1A1A"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+    <Button
+        android:id="@+id/btnInstructions"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#fddc5c"
+        android:text="הוראות"
+        android:textColor="#1A1A1A"
+        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnInstructions"
-            android:layout_width="220dp"
-            android:layout_height="50dp"
-            android:text="הוראות"
-            android:backgroundTint="#fddc5c"
-            android:textColor="#1A1A1A"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="STRAWBERRY &amp; BANANA EDITION"
+        android:textColor="#ffc9d4"
+        android:textSize="10sp"
+        android:textStyle="bold|italic" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="STRAWBERRY &amp; BANANA EDITION"
-            android:textColor="#ffc9d4"
-            android:textSize="10sp"
-            android:textStyle="bold|italic"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BY ITAY ZRAHIA"
         android:textColor="#ffc9d4"
         android:textSize="10sp"
-        android:textStyle="bold|italic"
-       />
+        android:textStyle="bold|italic" />
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

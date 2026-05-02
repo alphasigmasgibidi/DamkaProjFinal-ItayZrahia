@@ -1,49 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="#1A1A1A"
+    android:orientation="vertical"
     android:padding="24dp">
 
     <TextView
-        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="בחר צוות בממלכה"
         android:textColor="#fddc5c"
         android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnWhite"
-        android:layout_width="0dp"
+        android:id="@+id/btnBanana"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#fddc5c"
         android:text="שחקן בננה"
         android:textColor="#1A1A1A"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnRed"
-        android:layout_width="0dp"
+        android:id="@+id/btnStrawberry"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="12dp"
         android:backgroundTint="#ffc9d4"
         android:text="שחקן תות"
         android:textColor="#1A1A1A"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnWhite" />
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

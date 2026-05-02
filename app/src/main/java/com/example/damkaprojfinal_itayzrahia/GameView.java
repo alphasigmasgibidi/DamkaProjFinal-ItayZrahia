@@ -31,11 +31,11 @@ public class GameView extends View
         this.coins = new ArrayList<Coin>();
         this.gameModule = new GameModule();
 
-        if (mode.equals("playerwhite"))
+        if (mode.equals("playerbanana"))
         {
             myTeam = Coin.TEAM_BANANA;
         }
-        else if (mode.equals("playerred"))
+        else if (mode.equals("playerstrawberry"))
         {
             myTeam = Coin.TEAM_STRAWBERRY;
         }

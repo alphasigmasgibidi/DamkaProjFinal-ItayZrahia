@@ -7,7 +7,7 @@ import android.widget.Button;
 
 public class StartGameDialog extends Dialog implements View.OnClickListener {
 
-    private Button btnWhite, btnRed;
+    private Button btnBanana, btnStrawberry;
     private MainActivity mainActivity;
 
     public StartGameDialog(MainActivity activity) {
@@ -20,18 +20,18 @@ public class StartGameDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_start_game_);
 
-        btnWhite = findViewById(R.id.btnWhite);
-        btnRed = findViewById(R.id.btnRed);
+        btnBanana = findViewById(R.id.btnBanana);
+        btnStrawberry = findViewById(R.id.btnStrawberry);
 
-        btnWhite.setOnClickListener(this);
-        btnRed.setOnClickListener(this);
+        btnBanana.setOnClickListener(this);
+        btnStrawberry.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v == btnWhite) {
+        if (v == btnBanana) {
             mainActivity.startGameByTeam(Coin.TEAM_BANANA);
-        } else if (v == btnRed) {
+        } else if (v == btnStrawberry) {
             mainActivity.startGameByTeam(Coin.TEAM_STRAWBERRY);
         }
         dismiss();
