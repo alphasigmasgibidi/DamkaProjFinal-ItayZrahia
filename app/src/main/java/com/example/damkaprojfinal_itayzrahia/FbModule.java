@@ -32,7 +32,6 @@ public class FbModule {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Position position = snapshot.getValue(Position.class);
-                if(position != null) // בדיקה שלא קוראים מצומת לא קיים בפיירבייס
                     ((GameActivity)context).setPositionFromFb(position);
             }
 
