@@ -32,6 +32,7 @@ public class FbModule {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Position position = snapshot.getValue(Position.class);
+                if (position != null)
                     ((GameActivity)context).setPositionFromFb(position);
             }
 

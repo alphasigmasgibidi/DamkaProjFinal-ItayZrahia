@@ -49,9 +49,9 @@ public class Coin extends Shape
         canvas.drawCircle(x, y, radius, p);
     }
 
-    public boolean didUserTouchMe(float xu, float yu)
+    public boolean didUserTouchMe(float xTouch, float yTouch)
     {
-       double distance = Math.sqrt(Math.pow((x - xu), 2) + Math.pow((y - yu), 2));
+       double distance = Math.sqrt(Math.pow((x - xTouch), 2) + Math.pow((y - yTouch), 2));
 
         if (distance < radius)
         {
