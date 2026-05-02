@@ -11,20 +11,17 @@ public class Coin extends Shape
     public float lastX, lastY;
     public int team;
     public int row, col;
-    public static final int TEAM_RED = -1;
-    public static final int TEAM_WHITE = 1;
+    public static final int TEAM_STRAWBERRY = -1;
+    public static final int TEAM_BANANA = 1;
 
     public Coin(float x, float y, float radius, int color, int team, int row, int col)
     {
         super(x, y, color);
-
-        this.type = "Coin"; //we name them so we can identify them
-
+        this.type = "Coin";
         this.radius = radius;
         this.team = team;
         this.row = row;
         this.col = col;
-
         this.lastX = x;
         this.lastY = y;
         this.p = new Paint();

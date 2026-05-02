@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GameModule
 {
-    public int currentTurn = Coin.TEAM_WHITE;
+    public int currentTurn = Coin.TEAM_BANANA;
 
     public static final int MOVE_ILEGAL = 0;
     public static final int MOVE_REGULAR = 1;
@@ -24,20 +24,20 @@ public class GameModule
 
     public void switchTurn()
     {
-        if (currentTurn == Coin.TEAM_WHITE)
+        if (currentTurn == Coin.TEAM_BANANA)
         {
-            currentTurn = Coin.TEAM_RED;
+            currentTurn = Coin.TEAM_STRAWBERRY;
         }
         else
         {
-            currentTurn = Coin.TEAM_WHITE;
+            currentTurn = Coin.TEAM_BANANA;
         }
     }
 
     public int checkMove(Coin c, int row_NEW, int col_NEW, ArrayList<Coin> all)
     {
 
-        King k = new King(all.remove(5));
+        King k = new King(all.remove(14));
         all.add(5, k);
         King kimk = new King(all.remove(2));
         all.add(2, kimk);
@@ -47,7 +47,7 @@ public class GameModule
             return MOVE_ILEGAL;
         }
 
-        if ((row_NEW + col_NEW) % 2 == 0) //-*Checks if coin is placed on RED squares*-
+        if ((row_NEW + col_NEW) % 2 == 0) //-*Checks if coin is placed on Dark squares*-
         {
             return MOVE_ILEGAL;
         }
@@ -97,7 +97,7 @@ public class GameModule
             return checkMoveIfKing(c, row_NEW, col_NEW, all, row_HEFRESH_ABSOLUTE, col_HEFRESH_ABSOLUTE, row_CURRENT, col_CURRENT );
         }
 
-        if (c.team == Coin.TEAM_WHITE) // if there's a jump of more than one square for WHITE
+        if (c.team == Coin.TEAM_BANANA) // if there's a jump of more than one square for Banana
         {
             if (row_HEFRESH >= 0)
             {
@@ -105,7 +105,7 @@ public class GameModule
             }
         }
 
-        if (c.team == Coin.TEAM_RED) // if there's a jump of more than one square for RED
+        if (c.team == Coin.TEAM_STRAWBERRY) // if there's a jump of more than one square for Strawberry
         {
             if (row_HEFRESH <= 0)
             {
@@ -179,12 +179,12 @@ public class GameModule
         boolean doesRedExist = false;
 
         for (Coin c : allCoins) {
-            if (c.team == Coin.TEAM_WHITE) doesWhiteExist = true;
-            if (c.team == Coin.TEAM_RED) doesRedExist = true;
+            if (c.team == Coin.TEAM_BANANA) doesWhiteExist = true;
+            if (c.team == Coin.TEAM_STRAWBERRY) doesRedExist = true;
         }
 
-        if (!doesRedExist) return Coin.TEAM_WHITE;
-        if (!doesWhiteExist) return Coin.TEAM_RED;
+        if (!doesRedExist) return Coin.TEAM_BANANA;
+        if (!doesWhiteExist) return Coin.TEAM_STRAWBERRY;
 
         return 0;
     }

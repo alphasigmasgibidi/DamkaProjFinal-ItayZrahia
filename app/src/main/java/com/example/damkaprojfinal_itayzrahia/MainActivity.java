@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void startGameByTeam(int team) {
         Intent intent = new Intent(this, GameActivity.class);
 
-        if (team == Coin.TEAM_WHITE) {
+        if (team == Coin.TEAM_BANANA) {
             intent.putExtra("mode", "playerwhite");
         } else {
             intent.putExtra("mode", "playerred");

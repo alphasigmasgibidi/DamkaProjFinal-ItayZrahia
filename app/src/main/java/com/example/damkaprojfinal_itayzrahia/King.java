@@ -4,33 +4,32 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class King extends Coin{
-
-
+public class King extends Coin {
     private Paint p;
+    private Paint borderPaint;
+
     public King(Coin other) {
         super(other);
+        p = new Paint(Paint.ANTI_ALIAS_FLAG);
+        borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(15);
+        borderPaint.setColor(Color.parseColor("#FFD700")); // Gold
 
-        p = new Paint();
-
-        if (this.team == TEAM_RED)
-        {
-            this.color = Color.parseColor("#ABABAB");
+        if (this.team == TEAM_STRAWBERRY) {
+            this.color = Color.parseColor("#ffc9d4"); // strawberry
+        } else {
+            this.color = Color.parseColor("#fddc5c"); // banana
         }
-        else
-        {
-            this.color = Color.parseColor("#e6b941");
-        }
 
-        this.type = "King"; //we name them so we can identify them
-
-
-        p.setColor(color);
-
+        this.type = "King";
+        p.setColor(this.color);
     }
 
-    public void draw(Canvas canvas)
-    {
+    @Override
+    public void draw(Canvas canvas) {
+        p.setStyle(Paint.Style.FILL);
         canvas.drawCircle(x, y, radius, p);
+        canvas.drawCircle(x, y, radius, borderPaint);
     }
 }

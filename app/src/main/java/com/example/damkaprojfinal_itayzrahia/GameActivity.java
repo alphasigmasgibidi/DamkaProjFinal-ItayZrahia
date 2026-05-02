@@ -25,26 +25,18 @@ public class GameActivity extends AppCompatActivity {
         if (gameView != null) {
             gameView.moveCoin(position);
 
-            if(gameView.isWin() == Coin.TEAM_WHITE)
-            {
-                if(GameView.myTeam == Coin.TEAM_WHITE)
-                {
+            if (gameView.isWin() == Coin.TEAM_BANANA) {
+                if (GameView.myTeam == Coin.TEAM_BANANA) {
                     Toast.makeText(this, "YOU WIN", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(this, "WHITE WINS", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "BANANA WINS", Toast.LENGTH_SHORT).show();
                 }
             }
-            if (gameView.isWin() == Coin.TEAM_RED)
-            {
-                if(GameView.myTeam == Coin.TEAM_RED)
-                {
+            if (gameView.isWin() == Coin.TEAM_STRAWBERRY) {
+                if (GameView.myTeam == Coin.TEAM_STRAWBERRY) {
                     Toast.makeText(this, "YOU WIN", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(this, "RED WINS", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "STRAWBERRY WINS", Toast.LENGTH_SHORT).show();
                 }
             }
         }

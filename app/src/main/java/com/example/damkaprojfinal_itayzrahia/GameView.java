@@ -33,15 +33,15 @@ public class GameView extends View
 
         if (mode.equals("playerwhite"))
         {
-            myTeam = Coin.TEAM_WHITE;
+            myTeam = Coin.TEAM_BANANA;
         }
         else if (mode.equals("playerred"))
         {
-            myTeam = Coin.TEAM_RED;
+            myTeam = Coin.TEAM_STRAWBERRY;
         }
         else
         {
-            myTeam = Coin.TEAM_WHITE;
+            myTeam = Coin.TEAM_BANANA;
         }
     }
 
@@ -107,13 +107,13 @@ public class GameView extends View
                     float coin1st_X = c * tileSize + tileSize / 2;
                     float coin1st_Y = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
 
-                    if (r < 3) //top of board (Silver Team Pieces)
+                    if (r < 3) //top of board (Strawberry Team Pieces)
                     {
-                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#5b5b59"), Coin.TEAM_RED, r, c));
+                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#ffc9d4"), Coin.TEAM_STRAWBERRY, r, c));
                     }
-                    else if (r > 4) //bottom of board (Gold Team Pieces)
+                    else if (r > 4) //bottom of board (Banana Team Pieces)
                     {
-                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#e1e6e0"), Coin.TEAM_WHITE, r, c));
+                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#fddc5c"), Coin.TEAM_BANANA, r, c));
                     }
                 }
             }
@@ -272,12 +272,12 @@ public class GameView extends View
                 float targetY;
                 float currentSpeed;
 
-                if (temp.team == Coin.TEAM_WHITE)
+                if (temp.team == Coin.TEAM_BANANA) // Is team Banana
                 {
                     targetY = -200;
                     currentSpeed = -speed;
                 }
-                else
+                else // Is team Strawberry
                 {
                     targetY = getHeight() + 200;
                     currentSpeed = speed;

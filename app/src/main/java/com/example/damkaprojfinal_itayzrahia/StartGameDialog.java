@@ -30,9 +30,9 @@ public class StartGameDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == btnWhite) {
-            mainActivity.startGameByTeam(Coin.TEAM_WHITE);
+            mainActivity.startGameByTeam(Coin.TEAM_BANANA);
         } else if (v == btnRed) {
-            mainActivity.startGameByTeam(Coin.TEAM_RED);
+            mainActivity.startGameByTeam(Coin.TEAM_STRAWBERRY);
         }
         dismiss();
     }

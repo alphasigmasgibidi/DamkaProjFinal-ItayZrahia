@@ -3,91 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A1A1A">
+    android:background="#1A1A1A"
+    android:padding="24dp">
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="חזור"
-        android:backgroundTint="#B71C1C"
-        android:layout_margin="16dp"
-        android:textAllCaps="false"
+        android:backgroundTint="#fddc5c"
+        android:textColor="#1A1A1A"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:onClick="onBackClick"/>
 
     <TextView
-        android:id="@+id/tvTitlde"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="עושים סדר בלוח"
-        android:textColor="#FAEEE2"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack" />
-
-    <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="עושים סדר בלוח"
-        android:textColor="#D32F2F"
-        android:textSize="32sp"
+        android:text="הוראות המשחק"
+        android:textColor="#ffc9d4"
+        android:textSize="34sp"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnBack" />
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="20dp"
-        android:padding="15dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="#1E1E1E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="20dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#E0E0E0"
-                android:textSize="17sp"
-                android:lineSpacingExtra="6dp"
-                android:gravity="right"
-                android:text="ברוכים הבאים לדמקה של איתי! בואו נסגור פינות כדי שלא תעשו פדיחות מול המחשב:\n\n
-🔹 **איך מתחילים?**\n
-לחץ על הכפתור שכתוב עליו **'שחק לבן'** בשביל לפתוח את המשחק בתור השחקן הראשון. אם אתה מרגיש הרפתקן, לחץ על הכפתור **'שחק אדום'** כדי לשחק בתור השחקן השני.\n\n
-🔹 **לבד מול המכונה?**\n
-לחץ על הכפתור שכתוב עליו **'בינה מלאכותית'** בשביל לראות אם אתה חכם יותר מהקוד שכתבתי. המלצה שלי: אל תזלזל בו.\n\n
-🔹 **מה הכללים בתכלס?**\n
-גוררים את הדיסקיות רק באלכסון על הריבועים השחורים. זיהית דיסקית של היריב עם ריבוע ריק מאחוריה? פשוט 'תדלג' מעליה והיא עפה מהלוח. בתיאבון!\n\n
-🔹 **מתי הופכים למלך?**\n
-ברגע שהגעת לשורה האחרונה של היריב, הכלי שלך הופך למלך. מלך יכול לזוז גם אחורה – כי בכל זאת, הוא הבוס.\n\n
-🔹 **למה להירשם?**\n
-לחץ על הכפתור שכתוב עליו **'הרשמה'** בשביל לפתוח חשבון ולהתחבר לפיירבייס. ככה נוכל לזהות אותך כשאתה מפרק חברים ברשת.\n\n
-🔹 **נתקעת?**\n
-הכפתור **'הוראות'** יחזיר אותך להסברים, אבל בינינו – הדרך הכי טובה ללמוד היא פשוט להתחיל להזיז כלים.\n\n
-**טיפ קטן:** תשמרו על השורות האחוריות שלכם סגורות כמה שיותר זמן. חבל שהיריב יקבל מלך בחינם.\n\n
-יאללה, פחות דיבורים, יותר מהלכים. שיהיה בהצלחה!" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
-
-        </LinearLayout>
-    </ScrollView>
-
+            android:textColor="#E0E0E0"
+            android:textSize="18sp"
+            android:lineSpacingExtra="8dp"
+            android:gravity="right"
+            android:text="1. זזים רק באלכסון על המשבצות הכהות.\n\n2. אוכלים כלי של היריב על ידי דילוג מעליו למשבצת פנויה.\n\n3. כלי שהגיע לשורה האחרונה הופך למלך.\n\n4. מלך יכול לזוז ולדלג גם אחורה.\n\n5. המנצח הוא מי שאוכל את כל כלי היריב." />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
