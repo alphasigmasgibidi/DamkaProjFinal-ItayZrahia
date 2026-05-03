@@ -6,24 +6,11 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="30dp"
-        android:layout_gravity="left"
-        android:backgroundTint="#fddc5c"
-        android:onClick="onBackClick"
-        android:text="חזור"
-        android:textColor="#1A1A1A"
-        android:textStyle="bold" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         android:text="הוראות המשחק"
         android:textColor="#ffc9d4"
         android:textSize="40sp"
@@ -40,12 +27,27 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/tvInstructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="1. זזים רק באלכסון על המשבצות הכהות.\n\n2. אוכלים כלי של היריב על ידי דילוג מעליו למשבצת פנויה.\n\n3. כלי שהגיע לשורה האחרונה הופך למלך.\n\n4. מלך יכול לזוז ולדלג גם אחורה.\n\n5. המנצח הוא מי שאוכל את כל כלי היריב."
             android:textColor="#E0E0E0"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:text="1. זזים רק באלכסון על המשבצות הכהות.\n\n2. אוכלים כלי של היריב על ידי דילוג מעליו למשבצת פנויה.\n\n3. כלי שהגיע לשורה האחרונה הופך למלך.\n\n4. מלך יכול לזוז ולדלג גם אחורה.\n\n5. המנצח הוא מי שאוכל את כל כלי היריב." />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="right"
+            android:backgroundTint="#fddc5c"
+            android:onClick="onBackClick"
+            android:text="חזור"
+            android:textColor="#1A1A1A"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 </LinearLayout>

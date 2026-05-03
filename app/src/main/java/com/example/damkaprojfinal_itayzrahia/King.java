@@ -14,12 +14,14 @@ public class King extends Coin {
         borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(15);
-        borderPaint.setColor(Color.parseColor("#FFD700")); // Gold
+
 
         if (this.team == TEAM_STRAWBERRY) {
             this.color = Color.parseColor("#ffc9d4"); // strawberry
+            borderPaint.setColor(Color.parseColor("#fddc5c")); // Banana crown
         } else {
             this.color = Color.parseColor("#fddc5c"); // banana
+            borderPaint.setColor(Color.parseColor("#ffc9d4")); // Strawberry crown
         }
 
         this.type = "King";
