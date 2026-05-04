@@ -29,24 +29,24 @@ public class GameActivity extends AppCompatActivity
         {
             gameView.moveCoin(position);
 
-            if (gameView.isWin() == Coin.TEAM_BANANA)//after every turn checks if someone won
+            if (gameView.isWin() == Coin.TEAM_BANANA)//after every turn checks if banana won
             {
-                if (GameView.myTeam == Coin.TEAM_BANANA)
+                if (GameView.myTeam == Coin.TEAM_BANANA) //if im banana, I won
                 {
                     Toast.makeText(this, "YOU WIN", Toast.LENGTH_SHORT).show();
                 }
-                else
+                else //if they are banana, I lost
                 {
-                    Toast.makeText(this, "BANANA WINS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "YOU LOSE", Toast.LENGTH_SHORT).show();
                 }
             }
-            if (gameView.isWin() == Coin.TEAM_STRAWBERRY)//after every turn checks if someone won
+            if (gameView.isWin() == Coin.TEAM_STRAWBERRY)//after every turn checks if strawberry won
             {
-                if (GameView.myTeam == Coin.TEAM_STRAWBERRY)
+                if (GameView.myTeam == Coin.TEAM_STRAWBERRY) //if im strawberry, I won
                 {
                     Toast.makeText(this, "YOU WIN", Toast.LENGTH_SHORT).show();
                 }
-                else
+                else //if they are strawberry, I lost
                 {
                     Toast.makeText(this, "STRAWBERRY WINS", Toast.LENGTH_SHORT).show();
                 }

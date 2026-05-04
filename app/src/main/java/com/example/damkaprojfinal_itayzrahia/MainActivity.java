@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void startGameByTeam(int team) {
+    public void startGameByTeam(int team) //summoned by "dialog" after choosing team
+    {
         Intent intent = new Intent(this, GameActivity.class);
 
         if (team == Coin.TEAM_BANANA) {

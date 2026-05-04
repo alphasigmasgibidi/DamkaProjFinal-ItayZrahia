@@ -54,6 +54,7 @@ public class GameView extends View
             isFirstTime = false;
         }
 
+
         drawBoard(canvas);
         drawCoins(canvas);
     }
@@ -100,16 +101,16 @@ public class GameView extends View
             {
                 if ((r + c) % 2 != 0) //only place pieces on dark squares
                 {
-                    float coin1st_X = c * tileSize + tileSize / 2;
-                    float coin1st_Y = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
+                    float coinFirstX = c * tileSize + tileSize / 2;
+                    float coinFirstY = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
 
-                    if (r < 3) //top of board (Strawberry Team Pieces)
+                    if (r < 1) //top of board (Strawberry Team Pieces)
                     {
-                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#ffc9d4"), Coin.TEAM_STRAWBERRY, r, c));
+                        coins.add(new Coin(coinFirstX, coinFirstY, radius, Color.parseColor("#ffc9d4"), Coin.TEAM_STRAWBERRY, r, c, "regularCoin"));
                     }
                     else if (r > 4) //bottom of board (Banana Team Pieces)
                     {
-                        coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#fddc5c"), Coin.TEAM_BANANA, r, c));
+                        coins.add(new Coin(coinFirstX, coinFirstY, radius, Color.parseColor("#fddc5c"), Coin.TEAM_BANANA, r, c, "regularCoin"));
                     }
                 }
             }
@@ -163,19 +164,20 @@ public class GameView extends View
         //action of draggnig the coin
         //we follow the movement of the coin
         //until you let go of it
-
         if (event.getAction() == MotionEvent.ACTION_MOVE)
         {
             if (activeCoin != null)
             {
-                activeCoin.x = touchX;
+                activeCoin.x = touchX; //saving the location while moving
                 activeCoin.y = touchY;
                 invalidate();
             }
         }
 
+        //when dropping the hold on the coin
         if (event.getAction() == MotionEvent.ACTION_UP)
         {
+
             if (activeCoin != null)
             {
                 int targetR = (int) ((touchY - BOARD_STARTS_FROM) / tileSize);
@@ -183,27 +185,31 @@ public class GameView extends View
 
                 int moveResult = gameModule.checkMove(activeCoin, targetR, targetC, coins);
 
-                if (moveResult == 0)
+                if (moveResult == 0) //if move is ilegal, return to last location
                 {
                     activeCoin.x = activeCoin.lastX;
                     activeCoin.y = activeCoin.lastY;
                 }
-                else
+                else //attemp to start setting a new location in firebase
                 {
                     fb.setPositionInFirebase(new Position(activeCoin.row, activeCoin.col, targetR, targetC));
                 }
 
-                activeCoin = null;
-                invalidate();
+                activeCoin = null; //turn is over, ready for a new coin to become active
+                invalidate(); //draw again the new board
             }
         }
         return true;
     }
 
+    //this command moves the coin in both sides of the screen
+    //both androids check which coin has changed from firebase
+    //they both change its position for both players
     public void moveCoin(Position p)
     {
         Coin coinToMove = null;
 
+        //find the coin to move based on its location before movement from position (that is taken from the firebase)
         for (int i = 0; i < coins.size(); i++)
         {
             if (coins.get(i).row == p.getLastRow())
@@ -211,81 +217,84 @@ public class GameView extends View
                 if (coins.get(i).col == p.getLastCol())
                 {
                     coinToMove = coins.get(i);
-                    break;
+
                 }
             }
         }
 
-        if (coinToMove != null)
+        //we check if the legal move was one where a coin is eaten
+        //if a move was passed as "legal" although a coin took a two block step
+        //it eats someone, so we need to figure out which coin to remove (for both players)
+        int rowHefresh = p.getNewRow() - p.getLastRow();
+        if (Math.abs(rowHefresh) == 2)
         {
-            int dr = p.getNewRow() - p.getLastRow();
-            int absDr = dr;
-            if (absDr < 0)
-            {
-                absDr = -absDr;
-            }
+            int rowMiddle = (p.getLastRow() + p.getNewRow()) / 2;
+            int colMiddle = (p.getLastCol() + p.getNewCol()) / 2;
 
-            if (absDr == 2)
+            for (int i = 0; i < coins.size(); i++)
             {
-                int midR = (p.getLastRow() + p.getNewRow()) / 2;
-                int midC = (p.getLastCol() + p.getNewCol()) / 2;
-
-                for (int i = 0; i < coins.size(); i++)
+                if (coins.get(i).row == rowMiddle)
                 {
-                    if (coins.get(i).row == midR)
+                    if (coins.get(i).col == colMiddle)
                     {
-                        if (coins.get(i).col == midC)
-                        {
-                            animateAndRemoveCoin(coins.get(i));
-                            break;
-                        }
+                        animateAndRemoveCoin(coins.get(i));
+                        //if a coin was in the middle of an "eat" move, it needs to be removed
+
                     }
                 }
             }
-
-            coinToMove.row = p.getNewRow();
-            coinToMove.col = p.getNewCol();
-            coinToMove.x = coinToMove.col * tileSize + tileSize / 2;
-            coinToMove.y = BOARD_STARTS_FROM + coinToMove.row * tileSize + tileSize / 2;
-            coinToMove.lastX = coinToMove.x;
-            coinToMove.lastY = coinToMove.y;
-
-            gameModule.switchTurn();
-            invalidate();
         }
+
+        //gives the coin that should move its new location for both players
+        coinToMove.row = p.getNewRow();
+        coinToMove.col = p.getNewCol();
+        coinToMove.x = coinToMove.col * tileSize + tileSize / 2;
+        coinToMove.y = BOARD_STARTS_FROM + coinToMove.row * tileSize + tileSize / 2;
+        coinToMove.lastX = coinToMove.x;
+        coinToMove.lastY = coinToMove.y;
+
+        gameModule.switchTurn(); //turn is over
+        invalidate(); //draw the board again so the coin moves to its new location
+
     }
 
     private void animateAndRemoveCoin(final Coin eatenCoin)
     {
-        Coin temp = new Coin(eatenCoin);
-        coins.remove(eatenCoin);
+        //this is the most complicated issue I have encountered in this project:
+        //because we summon the command "animateAndRemoveCoin" inside "moveCoin" and-
+        //"movecoin" is summoned by "setPositionFromFb" which also summons "checkWin"-
+        // when the deleted coin starts to be animated
+        //the new "thread" runs at the same time.
+        //meaning the command "animate...." sort of ends
+        //so "checkWin" activates while the deleted coin is still inside the arraylist
+        //so the entire turn will not count as victory even if it's the last turn
+        //and if we were to delete the coin before animating it, well you can't animate a deleted coin.
+        //note to self: explain how u fixed it
 
-        eatenCoin.row = -1;
-        eatenCoin.col = -1;
+        eatenCoin.ChangeTypeToEatenCoin();
 
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-                final float speed = 25;
                 float targetY;
                 float currentSpeed;
 
-                if (temp.team == Coin.TEAM_BANANA) // Is team Banana
+                if (eatenCoin.team == Coin.TEAM_BANANA) //if team Banana we want it to float up when eaten
                 {
                     targetY = -200;
-                    currentSpeed = -speed;
+                    currentSpeed = -25;
                 }
-                else // Is team Strawberry
+                else //if team Strawberry we want it to float down when eaten
                 {
                     targetY = getHeight() + 200;
-                    currentSpeed = speed;
+                    currentSpeed = 25;
                 }
 
-                while ((currentSpeed < 0 && temp.y > targetY) || (currentSpeed > 0 && temp.y < targetY))
+                while ((currentSpeed < 0 && eatenCoin.y > targetY) || (currentSpeed > 0 && eatenCoin.y < targetY))
                 {
-                    temp.y += currentSpeed;
+                    eatenCoin.y = eatenCoin.y + currentSpeed;
                     postInvalidate();
 
                     try
@@ -294,16 +303,19 @@ public class GameView extends View
                     }
                     catch (InterruptedException e)
                     {
+
                     }
                 }
-
-                coins.remove(temp);
+                coins.remove(eatenCoin);
                 postInvalidate();
             }
-        }).start();
+
+        }).start(); //the ")" is to close off the thread: "new Thread(new Runnable() .... ).start();"
+
     }
 
-    public int isWin() {
+    public int isWin()
+    {
         return gameModule.checkWinner(this.coins);
     }
 }

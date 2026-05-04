@@ -131,8 +131,13 @@ public class GameModule
         boolean doesStrawberryExist = false;
 
         for (Coin c : allCoins) {
-            if (c.team == Coin.TEAM_BANANA) doesBananaExist = true;
-            if (c.team == Coin.TEAM_STRAWBERRY) doesStrawberryExist = true;
+            if (c.type != "eatenCoin")
+            //eatenCoin is the type of coin that is currently being animated out of the screen.
+            {
+                if (c.team == Coin.TEAM_BANANA) doesBananaExist = true;
+                if (c.team == Coin.TEAM_STRAWBERRY) doesStrawberryExist = true;
+            }
+
         }
 
         if (!doesStrawberryExist) return Coin.TEAM_BANANA;

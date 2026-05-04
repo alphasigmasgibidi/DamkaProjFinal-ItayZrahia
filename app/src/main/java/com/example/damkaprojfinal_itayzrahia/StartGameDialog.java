@@ -5,18 +5,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class StartGameDialog extends Dialog implements View.OnClickListener {
+public class StartGameDialog extends Dialog implements View.OnClickListener
+{
 
     private Button btnBanana, btnStrawberry;
     private MainActivity mainActivity;
 
-    public StartGameDialog(MainActivity activity) {
+    public StartGameDialog(MainActivity activity)
+    {
         super(activity);
         this.mainActivity = activity;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_start_game_);
 
@@ -28,10 +31,13 @@ public class StartGameDialog extends Dialog implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == btnBanana) {
+    public void onClick(View v)
+    {
+        if (v == btnBanana)
+        {
             mainActivity.startGameByTeam(Coin.TEAM_BANANA);
-        } else if (v == btnStrawberry) {
+        } else if (v == btnStrawberry)
+        {
             mainActivity.startGameByTeam(Coin.TEAM_STRAWBERRY);
         }
         dismiss();

@@ -14,10 +14,10 @@ public class Coin extends Shape
     public static final int TEAM_STRAWBERRY = -1;
     public static final int TEAM_BANANA = 1;
 
-    public Coin(float x, float y, float radius, int color, int team, int row, int col)
+    public Coin(float x, float y, float radius, int color, int team, int row, int col, String type)
     {
         super(x, y, color);
-        this.type = "Coin";
+        this.type = type;
         this.radius = radius;
         this.team = team;
         this.row = row;
@@ -28,19 +28,9 @@ public class Coin extends Shape
         this.p.setColor(color);
     }
 
-    public Coin(Coin other) // clone
+    public void ChangeTypeToEatenCoin ()
     {
-        super(other.x, other.y, other.color);
-
-        this.radius = other.radius;
-        this.team = other.team;
-        this.row = other.row;
-        this.col = other.col;
-
-        this.lastX = other.x;
-        this.lastY = other.y;
-        this.p = new Paint();
-        this.p.setColor(other.color);
+        this.type = "eatenCoin";
     }
 
     @Override
