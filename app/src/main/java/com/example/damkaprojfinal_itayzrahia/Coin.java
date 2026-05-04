@@ -28,7 +28,7 @@ public class Coin extends Shape
         this.p.setColor(color);
     }
 
-    public Coin(Coin other)
+    public Coin(Coin other) // clone
     {
         super(other.x, other.y, other.color);
 

@@ -5,13 +5,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity
+{
     FbModule fbModule;
     GameView gameView;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         String mode = getIntent().getStringExtra("mode");
@@ -21,21 +23,31 @@ public class GameActivity extends AppCompatActivity {
         setContentView(gameView);
     }
 
-    public void setPositionFromFb(Position position) {
-        if (gameView != null) {
+    public void setPositionFromFb(Position position)
+    {
+        if (gameView != null)
+        {
             gameView.moveCoin(position);
 
-            if (gameView.isWin() == Coin.TEAM_BANANA) {
-                if (GameView.myTeam == Coin.TEAM_BANANA) {
+            if (gameView.isWin() == Coin.TEAM_BANANA)//after every turn checks if someone won
+            {
+                if (GameView.myTeam == Coin.TEAM_BANANA)
+                {
                     Toast.makeText(this, "YOU WIN", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else
+                {
                     Toast.makeText(this, "BANANA WINS", Toast.LENGTH_SHORT).show();
                 }
             }
-            if (gameView.isWin() == Coin.TEAM_STRAWBERRY) {
-                if (GameView.myTeam == Coin.TEAM_STRAWBERRY) {
+            if (gameView.isWin() == Coin.TEAM_STRAWBERRY)//after every turn checks if someone won
+            {
+                if (GameView.myTeam == Coin.TEAM_STRAWBERRY)
+                {
                     Toast.makeText(this, "YOU WIN", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else
+                {
                     Toast.makeText(this, "STRAWBERRY WINS", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -31,17 +31,13 @@ public class GameView extends View
         this.coins = new ArrayList<Coin>();
         this.gameModule = new GameModule();
 
-        if (mode.equals("playerbanana"))
+        if (mode.equals("playerbanana")) //taking the intent from the chosen team
         {
             myTeam = Coin.TEAM_BANANA;
         }
-        else if (mode.equals("playerstrawberry"))
+        else //now either the player is banana or strawberry
         {
             myTeam = Coin.TEAM_STRAWBERRY;
-        }
-        else
-        {
-            myTeam = Coin.TEAM_BANANA;
         }
     }
 
@@ -49,7 +45,7 @@ public class GameView extends View
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-        canvas.drawColor(Color.parseColor("#1A1A1A"));
+        canvas.drawColor(Color.parseColor("#1A1A1A")); //the "black" background I set for every screen
 
         if (isFirstTime)
         {
@@ -67,23 +63,23 @@ public class GameView extends View
         int w = canvas.getWidth();
         int h = canvas.getHeight();
         tileSize = w / 8;
-        BOARD_STARTS_FROM = (h - (tileSize * 8)) / 2;
+        BOARD_STARTS_FROM = (h - (tileSize * 8)) / 2; //trying to have the board in the middle
 
         float x = 0;
         float y = BOARD_STARTS_FROM;
 
-        for (int r = 0; r < 8; r++) //rowVertical
+        for (int r = 0; r < 8; r++) //row=Vertical
         {
-            for (int c = 0; c < 8; c++) //colHorizontal
+            for (int c = 0; c < 8; c++) //col=Horizontal
             {
                 int color;
                 if ((r + c) % 2 == 0)
                 {
-                    color = Color.parseColor("#ebd3ac"); //light
+                    color = Color.parseColor("#ebd3ac"); //light square
                 }
                 else
                 {
-                    color = Color.parseColor("#a17e5d"); //dark
+                    color = Color.parseColor("#a17e5d"); //dark square
                 }
 
                 squares[r][c] = new Square(x, y, tileSize, tileSize, color);
@@ -98,16 +94,16 @@ public class GameView extends View
     {
         float radius = tileSize / 3;
 
-        for (int r = 0; r < 8; r++) //row = Vertical
+        for (int r = 0; r < 8; r++) //row = Vertical (we go over the whole board)
         {
             for (int c = 0; c < 8; c++) //col = Horizontal
             {
-                if ((r + c) % 2 != 0)
+                if ((r + c) % 2 != 0) //only place pieces on dark squares
                 {
                     float coin1st_X = c * tileSize + tileSize / 2;
                     float coin1st_Y = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
 
-                    if (r < 1) //top of board (Strawberry Team Pieces)
+                    if (r < 3) //top of board (Strawberry Team Pieces)
                     {
                         coins.add(new Coin(coin1st_X, coin1st_Y, radius, Color.parseColor("#ffc9d4"), Coin.TEAM_STRAWBERRY, r, c));
                     }
@@ -126,7 +122,7 @@ public class GameView extends View
         {
             for (int c = 0; c < 8; c++) //col = Horizontal
             {
-                squares[r][c].draw(canvas);
+                squares[r][c].draw(canvas); //drawing 64 squares
             }
         }
     }
@@ -135,20 +131,21 @@ public class GameView extends View
     {
         for (int i = 0; i < coins.size(); i++)
         {
-            coins.get(i).draw(canvas);
+            coins.get(i).draw(canvas); //drawing 24 coins
         }
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
+    public boolean onTouchEvent(MotionEvent event) //when touching the board
     {
-        float touchX = event.getX();
-        float touchY = event.getY();
+        float touchX = event.getX(); //x location of touch
+        float touchY = event.getY(); //y location of touch
 
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
             for (int i = 0; i < coins.size(); i++)
             {
+                //for every coin, check if touch location matches its location
                 Coin c = coins.get(i);
                 if (c.didUserTouchMe(touchX, touchY))
                 {
@@ -156,13 +153,16 @@ public class GameView extends View
                     {
                         if (gameModule.isMyTurn(c.team))
                         {
-                            activeCoin = c;
+                            activeCoin = c; //the chosen coin for this turn
                         }
                     }
-                    break;
                 }
             }
         }
+
+        //action of draggnig the coin
+        //we follow the movement of the coin
+        //until you let go of it
 
         if (event.getAction() == MotionEvent.ACTION_MOVE)
         {

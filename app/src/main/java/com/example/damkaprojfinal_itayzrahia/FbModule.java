@@ -10,13 +10,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class FbModule {
+public class FbModule
+{
     private Context context;
-    //private GameActivity gameActivity;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
 
-    public FbModule(Context context) {
+    public FbModule(Context context)
+    {
         this.context = context;
 
 
@@ -25,19 +26,21 @@ public class FbModule {
         initFirebaseListener();
     }
 
-    private void initFirebaseListener() {
+    private void initFirebaseListener()
+    {
 
         setPositionInFirebase(null);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
                 Position position = snapshot.getValue(Position.class);
                 if (position != null)
                     ((GameActivity)context).setPositionFromFb(position);
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error)
+            {
 
             }
         });
