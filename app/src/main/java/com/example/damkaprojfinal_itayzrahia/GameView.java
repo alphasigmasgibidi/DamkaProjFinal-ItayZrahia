@@ -104,7 +104,7 @@ public class GameView extends View
                     float coinFirstX = c * tileSize + tileSize / 2;
                     float coinFirstY = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
 
-                    if (r < 1) //top of board (Strawberry Team Pieces)
+                    if (r < 3) //top of board (Strawberry Team Pieces)
                     {
                         coins.add(new Coin(coinFirstX, coinFirstY, radius, Color.parseColor("#ffc9d4"), Coin.TEAM_STRAWBERRY, r, c, "regularCoin"));
                     }

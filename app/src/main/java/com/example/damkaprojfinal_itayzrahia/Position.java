@@ -7,6 +7,8 @@ public class Position
     private  int newRow;
     private int newCol;
 
+    public Position() {}
+
     public Position(int lastRow, int lastCol, int newRow, int newCol)
     {
         this.lastRow = lastRow;

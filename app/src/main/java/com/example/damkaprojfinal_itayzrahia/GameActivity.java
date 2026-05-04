@@ -37,7 +37,7 @@ public class GameActivity extends AppCompatActivity
                 }
                 else //if they are banana, I lost
                 {
-                    Toast.makeText(this, "YOU LOSE", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "BANANA WINS", Toast.LENGTH_SHORT).show();
                 }
             }
             if (gameView.isWin() == Coin.TEAM_STRAWBERRY)//after every turn checks if strawberry won
