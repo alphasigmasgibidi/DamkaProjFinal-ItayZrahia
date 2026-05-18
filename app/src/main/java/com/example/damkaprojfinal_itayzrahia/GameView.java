@@ -14,7 +14,7 @@ public class GameView extends View
     private Coin activeCoin;
     private boolean isFirstTime = true;
 
-    public static float tileSize;
+    public static float TILE_SIZE;
     public static float BOARD_STARTS_FROM;
 
     private String mode;
@@ -63,8 +63,8 @@ public class GameView extends View
     {
         int w = canvas.getWidth();
         int h = canvas.getHeight();
-        tileSize = w / 8;
-        BOARD_STARTS_FROM = (h - (tileSize * 8)) / 2; //trying to have the board in the middle
+        TILE_SIZE = w / 8;
+        BOARD_STARTS_FROM = (h - (TILE_SIZE * 8)) / 2; //trying to have the board in the middle
 
         float x = 0;
         float y = BOARD_STARTS_FROM;
@@ -83,17 +83,17 @@ public class GameView extends View
                     color = Color.parseColor("#a17e5d"); //dark square
                 }
 
-                squares[r][c] = new Square(x, y, tileSize, tileSize, color);
-                x = x + tileSize;
+                squares[r][c] = new Square(x, y, TILE_SIZE, TILE_SIZE, color);
+                x = x + TILE_SIZE;
             }
-            y = y + tileSize;
+            y = y + TILE_SIZE;
             x = 0;
         }
     }
 
     private void initCoins()
     {
-        float radius = tileSize / 3;
+        float radius = TILE_SIZE / 3;
 
         for (int r = 0; r < 8; r++) //row = Vertical (we go over the whole board)
         {
@@ -101,8 +101,8 @@ public class GameView extends View
             {
                 if ((r + c) % 2 != 0) //only place pieces on dark squares
                 {
-                    float coinFirstX = c * tileSize + tileSize / 2;
-                    float coinFirstY = BOARD_STARTS_FROM + r * tileSize + tileSize / 2;
+                    float coinFirstX = c * TILE_SIZE + TILE_SIZE / 2;
+                    float coinFirstY = BOARD_STARTS_FROM + r * TILE_SIZE + TILE_SIZE / 2;
 
                     if (r < 3) //top of board (Strawberry Team Pieces)
                     {
@@ -180,8 +180,8 @@ public class GameView extends View
 
             if (activeCoin != null)
             {
-                int targetR = (int) ((touchY - BOARD_STARTS_FROM) / tileSize);
-                int targetC = (int) (touchX / tileSize);
+                int targetR = (int) ((touchY - BOARD_STARTS_FROM) / TILE_SIZE);
+                int targetC = (int) (touchX / TILE_SIZE);
 
                 int moveResult = gameModule.checkMove(activeCoin, targetR, targetC, coins);
 
@@ -248,8 +248,8 @@ public class GameView extends View
         //gives the coin that should move its new location for both players
         coinToMove.row = p.getNewRow();
         coinToMove.col = p.getNewCol();
-        coinToMove.x = coinToMove.col * tileSize + tileSize / 2;
-        coinToMove.y = BOARD_STARTS_FROM + coinToMove.row * tileSize + tileSize / 2;
+        coinToMove.x = coinToMove.col * TILE_SIZE + TILE_SIZE / 2;
+        coinToMove.y = BOARD_STARTS_FROM + coinToMove.row * TILE_SIZE + TILE_SIZE / 2;
         coinToMove.lastX = coinToMove.x;
         coinToMove.lastY = coinToMove.y;
 
