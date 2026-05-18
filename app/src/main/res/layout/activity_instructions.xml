@@ -43,7 +43,6 @@
             android:layout_marginBottom="30dp"
             android:layout_gravity="right"
             android:backgroundTint="#fddc5c"
-            android:onClick="onBackClick"
             android:text="חזור"
             android:textColor="#1A1A1A"
             android:textStyle="bold" />
